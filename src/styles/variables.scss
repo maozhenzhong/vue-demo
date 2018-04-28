@@ -1,0 +1,48 @@
+@import './variablesLight.scss';
+@import './variablesDark.scss';
+/**
+ * Color system
+ */
+$white: #fff;
+$gray: #303133;
+$gray-100: #606266;
+$gray-200: #909399;
+$gray-300: #c0c4cc;
+$default-border-color: #e4e7ed;
+
+$green: #38c25d;
+$green-100: #d2fadd;
+$green-200: #ebfaef;
+
+$yellow: #ff9641;
+$yellow-100: #ffae38;
+$yellow-200: #ffe9d6;
+$yellow-300: #fff6fo;
+
+$blue: #609dca;
+$blue-100: #d2eafa;
+$blue-200: #ebf4fa;
+
+$red: #ff5b4e;
+$red-100: #fad5d2;
+$red-200: #faeceb;
+
+$primary: $blue;
+$success: $green;
+$danger: $red;
+$warning: $yellow;
+$login-bg: #2c353d;
+
+// $blue:#324157;
+$light-blue:#3A71A8;
+// $red:#C03639;
+$pink: #E65D6E;
+// $green: #30B08F;
+$tiffany: #4AB7BD;
+$yellow:#FEC171;
+$panGreen: #30B08F;
+
+//sidebar
+$menuBg:#304156;
+$subMenuBg:#1f2d3d;
+$menuHover:#001528;
