@@ -136,7 +136,7 @@
 </template>
 
 <script>
-import { updateUserInfo, getUserInfo, sendSmsVerifcationCode, changePassword } from '@/api/BaseInfo'
+import { updateUserInfo, getUserInfo, sendSmsVerifcationCode, changePassword } from '@/api/baseInfo'
 import { isvalidCellphone, isvalidCrewStaff, isvalidCrewRealname, isvalidOldPassword, isvalidPassword, isvalidRePassword, isvalidVerifcationCode } from '@/utils/validate'
 import avatarUpload from 'vue-image-crop-upload'
 import UserinfoBar from './components/UserinfoBar'
