@@ -1,6 +1,6 @@
 import { Message } from 'element-ui'
 import errorConfig from '@/errorConfig'
-// import { getOldPassword } from '@/api/BaseInfo'
+// import { getOldPassword } from '@/api/baseInfo'
 
 function isvalidEmpty(obj, inputValue, promptText) {
   if (inputValue === undefined || inputValue === null || inputValue === '') {
