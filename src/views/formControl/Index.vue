@@ -21,70 +21,70 @@
             </div>
           </el-form-item>
           <el-form-item prop="cellPhone" :label="$t('userInfo.cellPhone')">
-            <el-input 
-              name="cellPhone" 
-              ref="cellPhone" 
-              v-model="ruleForm.cellPhone" 
-              autoComplete="off" 
+            <el-input
+              name="cellPhone"
+              ref="cellPhone"
+              v-model="ruleForm.cellPhone"
+              autoComplete="off"
               :placeholder="$t('userInfo.cellPhonePlaceholder')"></el-input>
           </el-form-item>
           <el-form-item prop="crewStaff" :label="$t('userInfo.crewStaff')">
-            <el-input 
-              name="crewStaff" 
-              ref="crewStaff" 
-              v-model="ruleForm.crewStaff" 
-              autoComplete="off" 
+            <el-input
+              name="crewStaff"
+              ref="crewStaff"
+              v-model="ruleForm.crewStaff"
+              autoComplete="off"
               :placeholder="$t('userInfo.crewStaffPlaceholder')"></el-input>
           </el-form-item>
           <el-form-item prop="crewRealname" :label="$t('userInfo.crewRealname')">
-            <el-input 
-              name="crewRealname" 
-              ref="crewRealname" 
-              v-model="ruleForm.crewRealname" 
-              autoComplete="off" 
+            <el-input
+              name="crewRealname"
+              ref="crewRealname"
+              v-model="ruleForm.crewRealname"
+              autoComplete="off"
               :placeholder="$t('userInfo.crewRealnamePlaceholder')"></el-input>
           </el-form-item>
           <el-form-item prop="oldPassword" :label="$t('changePassword.oldPassword')">
-            <el-input 
-              name="oldPassword" 
-              type="password" 
-              ref="oldPassword" 
-              v-model="ruleForm.oldPassword" 
-              autoComplete="off" 
+            <el-input
+              name="oldPassword"
+              type="password"
+              ref="oldPassword"
+              v-model="ruleForm.oldPassword"
+              autoComplete="off"
               :placeholder="$t('changePassword.oldPasswordPlaceholder')"></el-input>
           </el-form-item>
           <el-form-item prop="password" :label="$t('changePassword.password')">
-            <el-input 
-              name="password" 
-              type="password" 
-              ref="password" 
-              v-model="ruleForm.password" 
-              autoComplete="off" 
+            <el-input
+              name="password"
+              type="password"
+              ref="password"
+              v-model="ruleForm.password"
+              autoComplete="off"
               :placeholder="$t('changePassword.passwordPlaceholder')"></el-input>
           </el-form-item>
           <el-form-item prop="rePassword" :label="$t('changePassword.rePassword')">
-            <el-input 
-              name="rePassword" 
-              type="password" 
-              ref="rePassword" 
-              v-model="ruleForm.rePassword" 
-              autoComplete="off" 
+            <el-input
+              name="rePassword"
+              type="password"
+              ref="rePassword"
+              v-model="ruleForm.rePassword"
+              autoComplete="off"
               :placeholder="$t('changePassword.rePasswordPlaceholder')"></el-input>
           </el-form-item>
           <el-form-item prop="smsCellPhone" :label="$t('changePassword.smsCellPhone')">
-            <el-input 
-              name="smsCellPhone" 
-              ref="smsCellPhone" 
+            <el-input
+              name="smsCellPhone"
+              ref="smsCellPhone"
               v-model="ruleForm.smsCellPhone"
-              autoComplete="off" 
+              autoComplete="off"
               :placeholder="$t('userInfo.cellPhonePlaceholder')"></el-input>
           </el-form-item>
           <el-form-item class="input-group" prop="verifcationCode" :label="$t('changePassword.verifcationCode')">
-            <el-input 
+            <el-input
               name="verifcationCode"
               type="tel"
-              v-model="ruleForm.verifcationCode" 
-              ref="verifcationCode" 
+              v-model="ruleForm.verifcationCode"
+              ref="verifcationCode"
               autoComplete="off"
               :placeholder="$t('changePassword.verifcationCodePlaceholder')">
             </el-input>
@@ -96,10 +96,10 @@
             </div>
           </el-form-item>
           <el-form-item prop="usergroup" :label="$t('form.usergroup')">
-            <el-select 
-              name="usergroup" 
-              ref="usergroup" 
-              v-model="ruleForm.usergroup" 
+            <el-select
+              name="usergroup"
+              ref="usergroup"
+              v-model="ruleForm.usergroup"
               :placeholder="$t('form.usergroupPlaseholder')">
               <el-option value="BOC" label="中国银行"></el-option>
               <el-option value="CMB" label="招商银行"></el-option>
@@ -118,58 +118,58 @@
             </el-checkbox-group>
           </el-form-item>
           <el-form-item prop="question" :label="$t('question.question')">
-            <el-input 
-              name="question" 
-              ref="question" 
-              v-model="ruleForm.question" 
-              autoComplete="off" 
+            <el-input
+              name="question"
+              ref="question"
+              v-model="ruleForm.question"
+              autoComplete="off"
               :placeholder="$t('question.questionPlaceholder')"></el-input>
           </el-form-item>
           <el-form-item prop="answer" :label="$t('question.answer')">
-            <el-input 
-            name="answer" 
-            type="textarea" 
-            ref="answer" 
-            v-model="ruleForm.answer" 
-            autoComplete="off" 
+            <el-input
+            name="answer"
+            type="textarea"
+            ref="answer"
+            v-model="ruleForm.answer"
+            autoComplete="off"
             :placeholder="$t('question.answerPlaceholder')"></el-input>
           </el-form-item>
           <el-form-item prop="updateTime" :label="$t('form.updateTime')">
             <el-date-picker
-              name="updateTime" 
-              ref="updateTime" 
+              name="updateTime"
+              ref="updateTime"
               type="date"
-              v-model="ruleForm.updateTime" 
+              v-model="ruleForm.updateTime"
               :placeholder="$t('form.updateTimePlaceholder')">
             </el-date-picker>
-            <!-- <el-input 
-              name="updateTime" 
-              ref="updateTime" 
-              v-model="ruleForm.updateTime" 
-              autoComplete="off" 
+            <!-- <el-input
+              name="updateTime"
+              ref="updateTime"
+              v-model="ruleForm.updateTime"
+              autoComplete="off"
               :placeholder="$t('form.updateTimePlaceholder')"></el-input> -->
           </el-form-item>
           <el-form-item :label="$t('products.quota')" required>
             <el-col :span="11">
               <el-form-item prop="quotaUpperLimit">
-                <el-input 
-                  name="quotaUpperLimit" 
+                <el-input
+                  name="quotaUpperLimit"
                   type="number"
-                  ref="quotaUpperLimit" 
-                  v-model="ruleForm.quotaUpperLimit" 
-                  autoComplete="off" 
+                  ref="quotaUpperLimit"
+                  v-model="ruleForm.quotaUpperLimit"
+                  autoComplete="off"
                   :placeholder="$t('products.quotaUpperLimitPlaceholder')"></el-input>
               </el-form-item>
             </el-col>
             <el-col class="line" :span="2" style="text-align: center;">-</el-col>
             <el-col :span="11">
               <el-form-item prop="quotaLowerLimit">
-                <el-input 
-                  name="quotaLowerLimit" 
+                <el-input
+                  name="quotaLowerLimit"
                   type="number"
-                  ref="quotaLowerLimit" 
-                  v-model="ruleForm.quotaLowerLimit" 
-                  autoComplete="off" 
+                  ref="quotaLowerLimit"
+                  v-model="ruleForm.quotaLowerLimit"
+                  autoComplete="off"
                   :placeholder="$t('products.quotaLowerLimitPlaceholder')"></el-input>
               </el-form-item>
             </el-col>
@@ -177,24 +177,24 @@
           <el-form-item :label="$t('products.interestRate')" required>
             <el-col :span="11">
               <el-form-item prop="interestRateUpperLimit">
-                <el-input 
-                  name="interestRateUpperLimit" 
+                <el-input
+                  name="interestRateUpperLimit"
                   type="number"
-                  ref="interestRateUpperLimit" 
-                  v-model="ruleForm.interestRateUpperLimit" 
-                  autoComplete="off" 
+                  ref="interestRateUpperLimit"
+                  v-model="ruleForm.interestRateUpperLimit"
+                  autoComplete="off"
                   :placeholder="$t('products.interestRateUpperLimitPlaceholder')"></el-input>
               </el-form-item>
             </el-col>
             <el-col class="line" :span="2" style="text-align: center;">-</el-col>
             <el-col :span="11">
               <el-form-item prop="interestRateLowerLimit">
-                <el-input 
-                  name="interestRateLowerLimit" 
+                <el-input
+                  name="interestRateLowerLimit"
                   type="number"
-                  ref="interestRateLowerLimit" 
-                  v-model="ruleForm.interestRateLowerLimit" 
-                  autoComplete="off" 
+                  ref="interestRateLowerLimit"
+                  v-model="ruleForm.interestRateLowerLimit"
+                  autoComplete="off"
                   :placeholder="$t('products.interestRateLowerLimitPlaceholder')"></el-input>
               </el-form-item>
             </el-col>
@@ -210,7 +210,7 @@
 </template>
 
 <script>
-import { sendSmsVerifcationCode } from '@/api/BaseInfo'
+import { sendSmsVerifcationCode } from '@/api/baseInfo'
 import { isvalidCellphone, isvalidCrewStaff, isvalidCrewRealname, isvalidOldPassword, isvalidPassword, isvalidRePassword, isvalidVerifcationCode, isvalidUsergroup, isvalidQuestion, isvalidAnswer, isvalidUpdateTime } from '@/utils/validate'
 import avatarUpload from 'vue-image-crop-upload'
 import errorConfig from '@/errorConfig'
