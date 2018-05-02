@@ -99,12 +99,7 @@ export default {
     quotaUpperLimit: '额度上限',
     quotaUpperLimitPlaceholder: '请输入额度上限',
     quotaLowerLimit: '额度下限',
-    quotaLowerLimitPlaceholder: '请输入额度上限',
-    interestRate: '利率',
-    interestRateUpperLimit: '利率上限',
-    interestRateUpperLimitPlaceholder: '请输入利率上限',
-    interestRateLowerLimit: '利率下限',
-    interestRateLowerLimitPlaceholder: '请输入利率上限'
+    quotaLowerLimitPlaceholder: '请输入额度下限'
   },
   table: {
     actions: '操作',

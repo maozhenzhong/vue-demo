@@ -3,90 +3,38 @@
     <el-row :gutter="10">
       <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
         <el-form :model="ruleForm" :rules="rules" status-icon ref="ruleForm" label-width="100px" class="demo-ruleForm">
-          <el-form-item label="头像">
+          <!-- <el-form-item label="头像">
             <div class="change-avatar">
               <img id="zoom" :src="imgDataUrl">
-              <el-button type="primary" size="medium" @click="toggleShow">{{$t('userInfo.setAvatar')}}<i class="el-icon-upload el-icon--right"></i></el-button>
-              <avatar-upload field="img"
-                @crop-success="cropSuccess"
-                @crop-upload-success="cropUploadSuccess"
-                @crop-upload-fail="cropUploadFail"
-                v-model="show"
-                :width="128"
-                :height="128"
-                url="/upload"
-                :params="params"
-                :headers="headers"
-                img-format="png"></avatar-upload>
+              <el-button type="primary" size="medium" @click="toggleShow">{{$t('userInfo.setAvatar')}}
+                <i class="el-icon-upload el-icon--right"></i>
+              </el-button>
+              <avatar-upload field="img" @crop-success="cropSuccess" @crop-upload-success="cropUploadSuccess" @crop-upload-fail="cropUploadFail" v-model="show" :width="128" :height="128" url="/upload" :params="params" :headers="headers" img-format="png"></avatar-upload>
             </div>
-          </el-form-item>
+          </el-form-item> -->
           <el-form-item prop="cellPhone" :label="$t('userInfo.cellPhone')">
-            <el-input
-              name="cellPhone"
-              ref="cellPhone"
-              v-model="ruleForm.cellPhone"
-              autoComplete="off"
-              :placeholder="$t('userInfo.cellPhonePlaceholder')"></el-input>
+            <el-input name="cellPhone" ref="cellPhone" v-model="ruleForm.cellPhone" autoComplete="off" :placeholder="$t('userInfo.cellPhonePlaceholder')"></el-input>
           </el-form-item>
           <el-form-item prop="crewStaff" :label="$t('userInfo.crewStaff')">
-            <el-input
-              name="crewStaff"
-              ref="crewStaff"
-              v-model="ruleForm.crewStaff"
-              autoComplete="off"
-              :placeholder="$t('userInfo.crewStaffPlaceholder')"></el-input>
+            <el-input name="crewStaff" ref="crewStaff" v-model="ruleForm.crewStaff" autoComplete="off" :placeholder="$t('userInfo.crewStaffPlaceholder')"></el-input>
           </el-form-item>
           <el-form-item prop="crewRealname" :label="$t('userInfo.crewRealname')">
-            <el-input
-              name="crewRealname"
-              ref="crewRealname"
-              v-model="ruleForm.crewRealname"
-              autoComplete="off"
-              :placeholder="$t('userInfo.crewRealnamePlaceholder')"></el-input>
+            <el-input name="crewRealname" ref="crewRealname" v-model="ruleForm.crewRealname" autoComplete="off" :placeholder="$t('userInfo.crewRealnamePlaceholder')"></el-input>
           </el-form-item>
           <el-form-item prop="oldPassword" :label="$t('changePassword.oldPassword')">
-            <el-input
-              name="oldPassword"
-              type="password"
-              ref="oldPassword"
-              v-model="ruleForm.oldPassword"
-              autoComplete="off"
-              :placeholder="$t('changePassword.oldPasswordPlaceholder')"></el-input>
+            <el-input name="oldPassword" type="password" ref="oldPassword" v-model="ruleForm.oldPassword" autoComplete="off" :placeholder="$t('changePassword.oldPasswordPlaceholder')"></el-input>
           </el-form-item>
           <el-form-item prop="password" :label="$t('changePassword.password')">
-            <el-input
-              name="password"
-              type="password"
-              ref="password"
-              v-model="ruleForm.password"
-              autoComplete="off"
-              :placeholder="$t('changePassword.passwordPlaceholder')"></el-input>
+            <el-input name="password" type="password" ref="password" v-model="ruleForm.password" autoComplete="off" :placeholder="$t('changePassword.passwordPlaceholder')"></el-input>
           </el-form-item>
           <el-form-item prop="rePassword" :label="$t('changePassword.rePassword')">
-            <el-input
-              name="rePassword"
-              type="password"
-              ref="rePassword"
-              v-model="ruleForm.rePassword"
-              autoComplete="off"
-              :placeholder="$t('changePassword.rePasswordPlaceholder')"></el-input>
+            <el-input name="rePassword" type="password" ref="rePassword" v-model="ruleForm.rePassword" autoComplete="off" :placeholder="$t('changePassword.rePasswordPlaceholder')"></el-input>
           </el-form-item>
           <el-form-item prop="smsCellPhone" :label="$t('changePassword.smsCellPhone')">
-            <el-input
-              name="smsCellPhone"
-              ref="smsCellPhone"
-              v-model="ruleForm.smsCellPhone"
-              autoComplete="off"
-              :placeholder="$t('userInfo.cellPhonePlaceholder')"></el-input>
+            <el-input name="smsCellPhone" ref="smsCellPhone" v-model="ruleForm.smsCellPhone" autoComplete="off" :placeholder="$t('userInfo.cellPhonePlaceholder')"></el-input>
           </el-form-item>
           <el-form-item class="input-group" prop="verifcationCode" :label="$t('changePassword.verifcationCode')">
-            <el-input
-              name="verifcationCode"
-              type="tel"
-              v-model="ruleForm.verifcationCode"
-              ref="verifcationCode"
-              autoComplete="off"
-              :placeholder="$t('changePassword.verifcationCodePlaceholder')">
+            <el-input name="verifcationCode" type="tel" v-model="ruleForm.verifcationCode" ref="verifcationCode" autoComplete="off" :placeholder="$t('changePassword.verifcationCodePlaceholder')">
             </el-input>
             <div class="input-group-btn">
               <el-button class="send-message" type="primary" @click.native.prevent="sendMsg" :disabled="this.sendMsgDisabled">
@@ -96,11 +44,7 @@
             </div>
           </el-form-item>
           <el-form-item prop="usergroup" :label="$t('form.usergroup')">
-            <el-select
-              name="usergroup"
-              ref="usergroup"
-              v-model="ruleForm.usergroup"
-              :placeholder="$t('form.usergroupPlaseholder')">
+            <el-select name="usergroup" ref="usergroup" v-model="ruleForm.usergroup" :placeholder="$t('form.usergroupPlaseholder')">
               <el-option value="BOC" label="中国银行"></el-option>
               <el-option value="CMB" label="招商银行"></el-option>
               <el-option value="CCB" label="中国建设银行"></el-option>
@@ -111,91 +55,38 @@
             </el-select>
           </el-form-item>
           <el-form-item :label="$t('form.role')" prop="role">
-            <el-checkbox-group v-model="ruleForm.type">
-              <el-checkbox label="系统管理员" name="crewAdmin"></el-checkbox>
-              <el-checkbox label="银行管理人员" name="crewAdmin"></el-checkbox>
-              <el-checkbox label="银行工作人员" name="crewAdmin"></el-checkbox>
-            </el-checkbox-group>
+            <el-radio-group v-model="ruleForm.role">
+              <el-radio :label="0">系统管理员</el-radio>
+              <el-radio :label="1">银行管理人员</el-radio>
+              <el-radio :label="2">银行工作人员</el-radio>
+            </el-radio-group>
           </el-form-item>
           <el-form-item prop="question" :label="$t('question.question')">
-            <el-input
-              name="question"
-              ref="question"
-              v-model="ruleForm.question"
-              autoComplete="off"
-              :placeholder="$t('question.questionPlaceholder')"></el-input>
+            <el-input name="question" ref="question" v-model="ruleForm.question" autoComplete="off" :placeholder="$t('question.questionPlaceholder')"></el-input>
           </el-form-item>
           <el-form-item prop="answer" :label="$t('question.answer')">
-            <el-input
-            name="answer"
-            type="textarea"
-            ref="answer"
-            v-model="ruleForm.answer"
-            autoComplete="off"
-            :placeholder="$t('question.answerPlaceholder')"></el-input>
+            <el-input name="answer" type="textarea" ref="answer" v-model="ruleForm.answer" autoComplete="off" :placeholder="$t('question.answerPlaceholder')"></el-input>
           </el-form-item>
           <el-form-item prop="updateTime" :label="$t('form.updateTime')">
-            <el-date-picker
-              name="updateTime"
-              ref="updateTime"
-              type="date"
-              v-model="ruleForm.updateTime"
-              :placeholder="$t('form.updateTimePlaceholder')">
+            <el-date-picker type="date" ref="updateTime" v-model="ruleForm.updateTime" :placeholder="$t('form.updateTimePlaceholder')">
             </el-date-picker>
-            <!-- <el-input
-              name="updateTime"
-              ref="updateTime"
-              v-model="ruleForm.updateTime"
-              autoComplete="off"
+            <!-- <el-input 
+              name="updateTime" 
+              ref="updateTime" 
+              v-model="ruleForm.updateTime" 
+              autoComplete="off" 
               :placeholder="$t('form.updateTimePlaceholder')"></el-input> -->
           </el-form-item>
           <el-form-item :label="$t('products.quota')" required>
             <el-col :span="11">
-              <el-form-item prop="quotaUpperLimit">
-                <el-input
-                  name="quotaUpperLimit"
-                  type="number"
-                  ref="quotaUpperLimit"
-                  v-model="ruleForm.quotaUpperLimit"
-                  autoComplete="off"
-                  :placeholder="$t('products.quotaUpperLimitPlaceholder')"></el-input>
-              </el-form-item>
-            </el-col>
-            <el-col class="line" :span="2" style="text-align: center;">-</el-col>
-            <el-col :span="11">
               <el-form-item prop="quotaLowerLimit">
-                <el-input
-                  name="quotaLowerLimit"
-                  type="number"
-                  ref="quotaLowerLimit"
-                  v-model="ruleForm.quotaLowerLimit"
-                  autoComplete="off"
-                  :placeholder="$t('products.quotaLowerLimitPlaceholder')"></el-input>
-              </el-form-item>
-            </el-col>
-          </el-form-item>
-          <el-form-item :label="$t('products.interestRate')" required>
-            <el-col :span="11">
-              <el-form-item prop="interestRateUpperLimit">
-                <el-input
-                  name="interestRateUpperLimit"
-                  type="number"
-                  ref="interestRateUpperLimit"
-                  v-model="ruleForm.interestRateUpperLimit"
-                  autoComplete="off"
-                  :placeholder="$t('products.interestRateUpperLimitPlaceholder')"></el-input>
+                <el-input name="quotaLowerLimit" type="number" ref="quotaLowerLimit" v-model="ruleForm.quotaLowerLimit" autoComplete="off" :placeholder="$t('products.quotaLowerLimitPlaceholder')"></el-input>
               </el-form-item>
             </el-col>
             <el-col class="line" :span="2" style="text-align: center;">-</el-col>
             <el-col :span="11">
-              <el-form-item prop="interestRateLowerLimit">
-                <el-input
-                  name="interestRateLowerLimit"
-                  type="number"
-                  ref="interestRateLowerLimit"
-                  v-model="ruleForm.interestRateLowerLimit"
-                  autoComplete="off"
-                  :placeholder="$t('products.interestRateLowerLimitPlaceholder')"></el-input>
+              <el-form-item prop="quotaUpperLimit">
+                <el-input name="quotaUpperLimit" type="number" ref="quotaUpperLimit" v-model="ruleForm.quotaUpperLimit" autoComplete="off" :placeholder="$t('products.quotaUpperLimitPlaceholder')"></el-input>
               </el-form-item>
             </el-col>
           </el-form-item>
@@ -211,7 +102,19 @@
 
 <script>
 import { sendSmsVerifcationCode } from '@/api/baseInfo'
-import { isvalidCellphone, isvalidCrewStaff, isvalidCrewRealname, isvalidOldPassword, isvalidPassword, isvalidRePassword, isvalidVerifcationCode, isvalidUsergroup, isvalidQuestion, isvalidAnswer, isvalidUpdateTime } from '@/utils/validate'
+import {
+  isvalidCellphone,
+  isvalidCrewStaff,
+  isvalidCrewRealname,
+  isvalidOldPassword,
+  isvalidPassword,
+  isvalidRePassword,
+  isvalidVerifcationCode,
+  isvalidQuestion,
+  isvalidAnswer,
+  isvalidQuotaLowerLimit,
+  isvalidQuotaUpperLimit
+} from '@/utils/validate'
 import avatarUpload from 'vue-image-crop-upload'
 import errorConfig from '@/errorConfig'
 import promptConfig from '@/promptConfig'
@@ -238,7 +141,7 @@ export default {
     const validateOldPassword = (rule, value, callback) => {
       const inputOldPassword = this.$refs.oldPassword
 
-      if (isvalidOldPassword(inputOldPassword, value, callback)) {
+      if (isvalidOldPassword(inputOldPassword, value)) {
         callback()
       }
     }
@@ -268,12 +171,6 @@ export default {
         callback()
       }
     }
-    const validateUsergroup = (rule, value, callback) => {
-      const inputUsergroup = this.$refs.usergroup
-      if (isvalidUsergroup(inputUsergroup, value)) {
-        callback()
-      }
-    }
     const validateQuestion = (rule, value, callback) => {
       const inputQuestion = this.$refs.question
       if (isvalidQuestion(inputQuestion, value)) {
@@ -286,9 +183,17 @@ export default {
         callback()
       }
     }
-    const validateUpdateTime = (rule, value, callback) => {
-      const inputUpdateTime = this.$refs.updateTime
-      if (isvalidUpdateTime(inputUpdateTime, value)) {
+    const validateQuotaLowerLimit = (rule, value, callback) => {
+      const inputQuotaLowerLimit = this.$refs.quotaLowerLimit
+      if (isvalidQuotaLowerLimit(inputQuotaLowerLimit, value)) {
+        callback()
+      }
+    }
+    const validateQuotaUpperLimit = (rule, value, callback) => {
+      const inputQuotaLowerLimit = this.$refs.quotaLowerLimit
+      const inputQuotaUpperLimit = this.$refs.quotaUpperLimit
+      const lowerLimitValue = this.$refs.quotaLowerLimit.currentValue
+      if (isvalidQuotaUpperLimit(inputQuotaUpperLimit, inputQuotaLowerLimit, value, lowerLimitValue)) {
         callback()
       }
     }
@@ -303,14 +208,13 @@ export default {
         smsCellPhone: '',
         verifcationCode: '',
         usergroup: '',
+        role: 0,
         question: '',
         crewAdmin: '',
         answer: '',
         updateTime: '',
         quotaUpperLimit: '',
         quotaLowerLimit: '',
-        interestRateUpperLimit: '',
-        interestRateLowerLimit: '',
         status: true
       },
       show: false,
@@ -325,21 +229,45 @@ export default {
       },
       imgDataUrl: './src/assets/img/default-avatar.png',
       rules: {
-        cellPhone: [{ required: true, trigger: 'blur', validator: validateCellphone }],
-        crewStaff: [{ required: true, trigger: 'blur', validator: validateCrewStaff }],
-        crewRealname: [{ required: true, trigger: 'blur', validator: validateCrewRealname }],
-        region: [
-          { required: true, message: '请选择活动区域', trigger: 'change' }
+        cellPhone: [
+          { required: true, validator: validateCellphone, trigger: 'blur' }
         ],
-        oldPassword: [{ required: true, trigger: 'blur', validator: validateOldPassword }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }],
-        rePassword: [{ required: true, trigger: 'blur', validator: validateRePassword }],
-        smsCellPhone: [{ required: true, trigger: 'blur', validator: validateSmsCellPhone }],
-        verifcationCode: [{ required: true, trigger: 'blur', validator: validateVerifcationCode }],
-        usergroup: [{ required: true, trigger: 'blur', validator: validateUsergroup }],
-        question: [{ required: true, trigger: 'blur', validator: validateQuestion }],
-        answer: [{ required: true, trigger: 'blur', validator: validateAnswer }],
-        updateTime: [{ required: true, trigger: 'change', validator: validateUpdateTime }]
+        crewStaff: [
+          { required: true, validator: validateCrewStaff, trigger: 'blur' }
+        ],
+        crewRealname: [
+          { required: true, validator: validateCrewRealname, trigger: 'blur' }
+        ],
+        role: [
+          { required: true, message: '请选择角色', trigger: 'change' }
+        ],
+        oldPassword: [
+          { required: true, validator: validateOldPassword, trigger: 'blur' }
+        ],
+        password: [
+          { required: true, validator: validatePassword, trigger: 'blur' }
+        ],
+        rePassword: [
+          { required: true, validator: validateRePassword, trigger: 'blur' }
+        ],
+        smsCellPhone: [
+          { required: true, validator: validateSmsCellPhone, trigger: 'blur' }
+        ],
+        verifcationCode: [
+          { required: true, validator: validateVerifcationCode, trigger: 'blur' }
+        ],
+        question: [
+          { required: true, validator: validateQuestion, trigger: 'blur' }
+        ],
+        answer: [
+          { required: true, validator: validateAnswer, trigger: 'blur' }
+        ],
+        quotaLowerLimit: [
+          { required: true, validator: validateQuotaLowerLimit, trigger: 'blur' }
+        ],
+        quotaUpperLimit: [
+          { required: true, validator: validateQuotaUpperLimit, trigger: 'blur' }
+        ]
       }
     }
   },
@@ -348,7 +276,7 @@ export default {
   },
   methods: {
     submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
+      this.$refs[formName].validate(valid => {
         if (valid) {
           alert('submit!')
         } else {
@@ -440,10 +368,10 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-  .change-avatar {
-    width: 128px;
-  }
-  .send-message {
-    width: 98px;
-  }
+.change-avatar {
+  width: 128px;
+}
+.send-message {
+  width: 98px;
+}
 </style>

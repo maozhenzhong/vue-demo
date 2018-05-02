@@ -14,12 +14,12 @@ for (listLength; listLength < count; listLength++) {
     'crewRole|1': ['人行管理人员', '银行工作人员', '银行管理人员'],
     'crewUsergroup|1': ['BOC', 'CMB', 'CCB', 'CEB', 'ABC', 'CMBC', 'CIB'],
     'crewStatus|1': [0, 1],
-    'avatar|1': ['./src/assets/img/default-avatar.png', './src/assets/img/user-avatar.png']
+    'avatar|1': ['../assets/img/default_avatar.png', '../assets/img/user_avatar.png']
   }))
 }
 
 export default {
-  getCrewList: config => {
+  getList: config => {
     const { crewStaff, crewRole, crewRealname, page = 1, limit = 20, sort } = param2Obj(config.url)
 
     let mockList = List.filter(item => {

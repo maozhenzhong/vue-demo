@@ -5,14 +5,14 @@ const userMap = {
     roles: ['admin'],
     token: 'admin',
     introduction: '管理员',
-    avatar: './src/assets/img/default-avatar.png',
+    avatar: './src/assets/img/default_avatar.png',
     name: '宜昌市中国银行'
   },
   editor: {
     roles: ['editor'],
     token: 'editor',
     introduction: '我是编辑',
-    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+    avatar: './src/assets/img/default_avatar.png',
     name: 'Normal Editor'
   }
 }

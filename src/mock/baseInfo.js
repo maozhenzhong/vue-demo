@@ -5,7 +5,7 @@ export default {
     crewStaff: 'ZHYH201802',
     affiliatedBank: '中国银行',
     crewRealname: '宜昌市中国银行',
-    avatarUrl: './src/assets/img/user-avatar.png'
+    avatarUrl: './src/assets/img/user_avatar.png'
   }),
   updateUserInfo: () => ({
     data: 'success'

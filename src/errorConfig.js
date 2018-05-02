@@ -21,5 +21,9 @@ export default {
   ER_USERGROUP_EMPTY: '请选择所属银行机构',
   ER_QUESTION_EMPTY: '请输入问题',
   ER_ANSWER_EMPTY: '请输入答案',
-  ER_UPDATETIME_EMPTY: '请选择时间'
+  ER_UPDATETIME_EMPTY: '请选择时间',
+  ER_QUOTA_LOWER_LIMIT_EMPTY: '请输入额度下限',
+  ER_QUOTA_LOWER_LIMIT: '请输入额度下限',
+  ER_QUOTA_UPPER_LIMIT_EMPTY: '请输入额度上限',
+  ER_QUOTA_UPPER_LIMIT: '额度上限必须大于额度下限'
 }

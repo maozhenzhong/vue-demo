@@ -23,7 +23,7 @@ Mock.mock(/\/baseInfo\/sendSmsVerifcationCode/, 'post', baseInfoAPI.sendMessage)
 Mock.mock(/\/baseInfo\/changePwd/, 'post', baseInfoAPI.changePassword)
 
 // 人员管理
-Mock.mock(/\/crew\/list/, 'get', crewAPI.getCrewList)
+Mock.mock(/\/crew\/list/, 'get', crewAPI.getList)
 
 // 文章相关
 Mock.mock(/\/article\/list/, 'get', articleAPI.getList)

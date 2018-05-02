@@ -26,22 +26,32 @@ body {
 #app::after {
   display: table;
   clear: both;
-  content: "";
+  content: '';
 }
 
 body {
-  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
 
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
 a,
 a:active,
 a:hover {
   text-decoration: none;
-  outline:none;
+  outline: none;
 }
 
 .left {
@@ -137,7 +147,7 @@ a:hover {
   z-index: 1060;
   padding: 0;
   font-size: 0;
-  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   @include clearfix;
 
@@ -243,7 +253,6 @@ a:hover {
 }
 
 .panel {
-
   .panel-heading {
     margin-bottom: 16px;
     border-bottom: 1px solid $gray-300;
@@ -408,7 +417,7 @@ a:hover {
 .hidden-mobile {
   display: none !important;
 }
-@media (min-width:768px) {
+@media (min-width: 768px) {
   .hidden-mobile {
     display: inline-block !important;
   }

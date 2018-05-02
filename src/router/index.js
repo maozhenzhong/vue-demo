@@ -248,21 +248,21 @@ export const asyncRouterMap = [
   },
 
   {
-    path: '/newsCenter',
+    path: '/news',
     component: Layout,
-    redirect: '/newsCenter/News',
+    redirect: '/news/NewsList',
     meta: {
       roles: ['admin'],
-      title: 'newsCenter',
+      title: 'news',
       icon: 'icon-news-center',
       noCache: true
     },
-    name: 'newsCenter',
+    name: 'news',
     children: [
       {
-        path: 'news',
-        component: _import('newsCenter/News'),
-        name: 'news',
+        path: 'NewsList',
+        component: _import('news/NewsList'),
+        name: 'newsList',
         meta: {
           title: 'news',
           icon: 'icon-news',
@@ -270,8 +270,8 @@ export const asyncRouterMap = [
         }
       },
       {
-        path: 'banner',
-        component: _import('newsCenter/Banner'),
+        path: 'Banner',
+        component: _import('news/Banner'),
         name: 'banner',
         meta: {
           title: 'banner',

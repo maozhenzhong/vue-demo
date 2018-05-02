@@ -26,36 +26,36 @@
                 </div>
               </el-form-item>
               <el-form-item prop="cellPhone" :label="$t('userInfo.cellPhone')">
-                <el-input
-                  name="cellPhone"
-                  ref="cellPhone"
-                  v-model="userInfoForm.cellPhone"
-                  autoComplete="off"
+                <el-input 
+                  name="cellPhone" 
+                  ref="cellPhone" 
+                  v-model="userInfoForm.cellPhone" 
+                  autoComplete="off" 
                   :placeholder="$t('userInfo.cellPhonePlaceholder')"></el-input>
               </el-form-item>
               <el-form-item prop="crewStaff" :label="$t('userInfo.crewStaff')">
-                <el-input
-                  name="crewStaff"
-                  ref="crewStaff"
-                  v-model="userInfoForm.crewStaff"
-                  autoComplete="off"
+                <el-input 
+                  name="crewStaff" 
+                  ref="crewStaff" 
+                  v-model="userInfoForm.crewStaff" 
+                  autoComplete="off" 
                   :placeholder="$t('userInfo.crewStaffPlaceholder')"></el-input>
               </el-form-item>
               <el-form-item prop="crewUserGroup" :label="$t('userInfo.crewUserGroup')">
-                <el-input
-                  name="crewUserGroup"
+                <el-input 
+                  name="crewUserGroup" 
                   ref="crewUserGroup"
-                  v-model="userInfoForm.crewUserGroup"
-                  autoComplete="off"
-                  :placeholder="$t('userInfo.crewUserGroupPlaceholder')"
+                  v-model="userInfoForm.crewUserGroup" 
+                  autoComplete="off" 
+                  :placeholder="$t('userInfo.crewUserGroupPlaceholder')" 
                   :disabled="true"></el-input>
               </el-form-item>
               <el-form-item prop="crewRealname" :label="$t('userInfo.crewRealname')">
-                <el-input
-                  name="crewRealname"
-                  ref="crewRealname"
-                  v-model="userInfoForm.crewRealname"
-                  autoComplete="off"
+                <el-input 
+                  name="crewRealname" 
+                  ref="crewRealname" 
+                  v-model="userInfoForm.crewRealname" 
+                  autoComplete="off" 
                   :placeholder="$t('userInfo.crewRealnamePlaceholder')"></el-input>
               </el-form-item>
               <el-form-item>
@@ -66,30 +66,30 @@
           <el-tab-pane :label="$t('userInfo.changePassword')" name="changePassword">
             <el-form class="forget-password-form" :model="changePasswordForm" status-icon :rules="changePasswordRules" ref="changePasswordForm" :label-width="formLabelWidth">
               <el-form-item prop="oldPassword" :label="$t('changePassword.oldPassword')">
-                <el-input
-                  name="oldPassword"
-                  type="password"
-                  ref="oldPassword"
-                  v-model="changePasswordForm.oldPassword"
-                  autoComplete="off"
+                <el-input 
+                  name="oldPassword" 
+                  type="password" 
+                  ref="oldPassword" 
+                  v-model="changePasswordForm.oldPassword" 
+                  autoComplete="off" 
                   :placeholder="$t('changePassword.oldPasswordPlaceholder')"></el-input>
               </el-form-item>
               <el-form-item prop="password" :label="$t('changePassword.password')">
-                <el-input
-                  name="password"
-                  type="password"
-                  ref="password"
-                  v-model="changePasswordForm.password"
-                  autoComplete="off"
+                <el-input 
+                  name="password" 
+                  type="password" 
+                  ref="password" 
+                  v-model="changePasswordForm.password" 
+                  autoComplete="off" 
                   :placeholder="$t('changePassword.passwordPlaceholder')"></el-input>
               </el-form-item>
               <el-form-item prop="rePassword" :label="$t('changePassword.rePassword')">
-                <el-input
-                  name="rePassword"
-                  type="password"
-                  ref="rePassword"
-                  v-model="changePasswordForm.rePassword"
-                  autoComplete="off"
+                <el-input 
+                  name="rePassword" 
+                  type="password" 
+                  ref="rePassword" 
+                  v-model="changePasswordForm.rePassword" 
+                  autoComplete="off" 
                   :placeholder="$t('changePassword.rePasswordPlaceholder')"></el-input>
               </el-form-item>
               <el-form-item>
@@ -104,19 +104,19 @@
     <el-dialog :title="$t('changePassword.authentication')" :visible.sync="dialogFormVerify">
       <el-form :model="smsVerifyForm" status-icon :rules="smsVerifyRules" ref="smsVerifyForm" :label-width="formLabelWidth">
         <el-form-item prop="smsCellPhone" :label="$t('changePassword.smsCellPhone')">
-          <el-input
-            name="smsCellPhone"
-            ref="smsCellPhone"
+          <el-input 
+            name="smsCellPhone" 
+            ref="smsCellPhone" 
             v-model="smsVerifyForm.smsCellPhone"
-            autoComplete="off"
+            autoComplete="off" 
             :placeholder="$t('userInfo.cellPhonePlaceholder')"></el-input>
         </el-form-item>
         <el-form-item class="input-group" prop="verifcationCode" :label="$t('changePassword.verifcationCode')">
-          <el-input
+          <el-input 
             name="verifcationCode"
             type="tel"
-            v-model="smsVerifyForm.verifcationCode"
-            ref="verifcationCode"
+            v-model="smsVerifyForm.verifcationCode" 
+            ref="verifcationCode" 
             autoComplete="off"
             :placeholder="$t('changePassword.verifcationCodePlaceholder')">
           </el-input>
@@ -253,6 +253,7 @@ export default {
   methods: {
     getInfo() {
       getUserInfo().then(response => {
+        console.log(response)
         this.userInfoForm = response.data
         this.avatarInfo.name = response.data.realname
         this.avatarInfo.avatarUrl = response.data.avatarUrl
@@ -408,7 +409,7 @@ export default {
 }
 .tab-pane {
   display: none;
-
+  
   &.active {
     display: block;
   }

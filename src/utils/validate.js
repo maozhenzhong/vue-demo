@@ -1,6 +1,6 @@
 import { Message } from 'element-ui'
 import errorConfig from '@/errorConfig'
-// import { getOldPassword } from '@/api/baseInfo'
+// import { getOldPassword } from '@/api/BaseInfo'
 
 function isvalidEmpty(obj, inputValue, promptText) {
   if (inputValue === undefined || inputValue === null || inputValue === '') {
@@ -8,35 +8,35 @@ function isvalidEmpty(obj, inputValue, promptText) {
       message: errorConfig[promptText],
       type: 'error'
     })
+
     if (obj) {
       obj.focus()
     }
+
     return false
   }
   return true
 }
 
-export function isvalidOldPassword(obj, value, callback) {
+export function isvalidOldPassword(obj, value) {
+  const pPattern = /^.{6,30}$/
   const oldPwdObj = obj
   const inputValue = value
 
   if (!isvalidEmpty(oldPwdObj, inputValue, 'ER_OLD_PASSWORD_EMPTY')) {
     return false
   }
-  return true
-  /* getOldPassword().then(response => {
-    const oldPwdValue = response.data.data
 
-    if (inputValue !== oldPwdValue) {
-      Message({
-        message: errorConfig.ER_OLD_PASSWORD,
-        type: 'error'
-      })
-      oldPwdObj.focus()
-      return false
-    }
-    callback()
-  })*/
+  if (!pPattern.test(inputValue)) {
+    Message({
+      message: errorConfig.ER_OLD_PASSWORD,
+      type: 'error'
+    })
+    oldPwdObj.focus()
+    return false
+  }
+
+  return true
 }
 
 export function isvalidPassword(obj, value) {
@@ -167,16 +167,6 @@ export function isvalidSignInPassword(obj, value) {
   return true
 }
 
-export function isvalidUsergroup(obj, value) {
-  const usergroupObj = obj
-  const inputValue = value
-
-  if (!isvalidEmpty(usergroupObj, inputValue, 'ER_USERGROUP_EMPTY')) {
-    return false
-  }
-  return true
-}
-
 export function isvalidQuestion(obj, value) {
   const questionObj = obj
   const inputValue = value
@@ -204,6 +194,57 @@ export function isvalidUpdateTime(obj, value) {
   if (!isvalidEmpty(updateTimeObj, inputValue, 'ER_UPDATETIME_EMPTY')) {
     return false
   }
+  return true
+}
+
+export function isvalidQuotaLowerLimit(obj, value) {
+  const quotaLowerLimitObj = obj
+  const inputValue = value
+  if (!isvalidEmpty(quotaLowerLimitObj, inputValue, 'ER_QUOTA_LOWER_LIMIT_EMPTY')) {
+    return false
+  }
+
+  if (!Number.isInteger(inputValue)) {
+    Message({
+      message: errorConfig.ER_QUOTA_LOWER_LIMIT,
+      type: 'error'
+    })
+    return false
+  }
+
+  return true
+}
+
+export function isvalidQuotaUpperLimit(obj, prevObj, value, lowerLimitValue) {
+  const quotaUpperLimitObj = obj
+  const quotaLowerLimitObj = prevObj
+  const inputValue = value
+  const inputLowerLimitValue = lowerLimitValue
+
+  if (!isvalidEmpty(quotaLowerLimitObj, inputLowerLimitValue, 'ER_QUOTA_LOWER_LIMIT_EMPTY')) {
+    return false
+  }
+
+  if (!isvalidEmpty(quotaUpperLimitObj, inputValue, 'ER_QUOTA_UPPER_LIMIT_EMPTY')) {
+    return false
+  }
+
+  if (!Number.isInteger(inputValue)) {
+    Message({
+      message: errorConfig.ER_QUOTA_UPPER_LIMIT,
+      type: 'error'
+    })
+    return false
+  }
+
+  if (inputValue <= inputLowerLimitValue) {
+    Message({
+      message: errorConfig.ER_QUOTA_UPPER_LIMIT,
+      type: 'error'
+    })
+    return false
+  }
+
   return true
 }
 

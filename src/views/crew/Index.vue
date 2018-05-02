@@ -4,11 +4,7 @@
     <div class="filter-bar">
       <div class="left">
         <el-select class="select-usergroup filter-item" v-model="listQuery.crewUsergroup" :placeholder="$t('filter.selectPlaceholder')">
-          <el-option
-            v-for="item in userGroupOptions"
-            :key="item.key"
-            :label="item.usergroup"
-            :value="item.key">
+          <el-option v-for="item in userGroupOptions" :key="item.key" :label="item.usergroup" :value="item.key">
           </el-option>
         </el-select>
         <div class="search-component filter-item">
@@ -22,66 +18,43 @@
       </div>
     </div>
     <!-- 列表 -->
-    <el-table
-      :data="crewList"
-      v-loading="crewListLoading"
-      :element-loading-text="$t('table.loadingText')"
-      border
-      fit
-      style="width: 100%">
-      <el-table-column
-        :label="$t('crew.crewStaff')"
-        align="center"
-        width="140">
+    <el-table :data="crewList" v-loading="crewListLoading" :element-loading-text="$t('table.loadingText')" border fit style="width: 100%">
+      <el-table-column :label="$t('crew.crewStaff')" align="center" width="140">
         <template slot-scope="scope">
           <span>{{ scope.row.crewStaff }}</span>
         </template>
       </el-table-column>
-      <el-table-column
-        :label="$t('crew.crewRealname')"
-        align="center"
-        width="140">
+      <el-table-column :label="$t('crew.crewRealname')" align="center" width="140">
         <template slot-scope="scope">
           <a class="link-type" @click="handleView(scope.row)">{{ scope.row.crewRealname }}</a>
         </template>
       </el-table-column>
-      <el-table-column
-        :label="$t('crew.crewCellPhone')"
-        align="center"
-        width="140">
+      <el-table-column :label="$t('crew.crewCellPhone')" align="center" width="140">
         <template slot-scope="scope">
           <span>{{ scope.row.crewCellPhone }}</span>
         </template>
       </el-table-column>
-      <el-table-column
-        :label="$t('crew.crewRole')">
+      <el-table-column :label="$t('crew.crewRole')">
         <template slot-scope="scope">
           <span>{{ scope.row.crewRole }}</span>
         </template>
       </el-table-column>
-      <el-table-column
-        :label="$t('crew.crewUsergroup')">
+      <el-table-column :label="$t('crew.crewUsergroup')">
         <template slot-scope="scope">
           <span>{{ scope.row.crewUsergroup | userGroupFilter }}</span>
         </template>
       </el-table-column>
-      <el-table-column
-        align="center"
-        :label="$t('crew.crewStatus')"
-        width="100">
+      <el-table-column align="center" :label="$t('crew.crewStatus')" width="100">
         <template slot-scope="scope">
           <el-tag :type="scope.row.crewStatus | statusFilterByTag">{{scope.row.crewStatus | statusFilter}}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column
-        fixed="right"
-        align="center"
-        :label="$t('table.actions')"
-        width="120">
+      <el-table-column fixed="right" align="center" :label="$t('table.actions')" width="120">
         <template slot-scope="scope">
           <el-dropdown>
             <span class="el-dropdown-link">
-              {{$t('table.actions')}}<i class="el-icon-arrow-down el-icon--right"></i>
+              {{$t('table.actions')}}
+              <i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>{{$t('table.modify')}}</el-dropdown-item>
@@ -99,22 +72,11 @@
     </el-table>
     <!-- 分页 -->
     <div class="pagination-container">
-      <el-pagination
-        background 
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="listQuery.page" 
-        :page-sizes="[10, 20, 30, 50]" 
-        :page-size="listQuery.limit" 
-        layout="total, sizes, prev, pager, next, jumper" 
-        :total="total">
+      <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="listQuery.page" :page-sizes="[10, 20, 30, 50]" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="total">
       </el-pagination>
     </div>
 
-    <el-dialog
-      :title="$t('crew.viewTitle')"
-      :visible.sync="crewDialogVisible"
-      width="390px">
+    <el-dialog :title="$t('crew.viewTitle')" :visible.sync="crewDialogVisible" width="390px">
       <div class="crew-info-container">
         <div class="crew-info-avatar">
           <figure class="avatar">
@@ -221,6 +183,7 @@ export default {
     getList() {
       this.crewListLoading = true
       fetchList(this.listQuery).then(response => {
+        console.log(response)
         this.crewList = response.data.items
         this.total = response.data.total
         this.crewListLoading = false
@@ -251,7 +214,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-@import "src/styles/mixin.scss";
+@import 'src/styles/mixin.scss';
 .select-usergroup {
   width: 120px;
 }
