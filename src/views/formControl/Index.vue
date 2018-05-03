@@ -13,28 +13,28 @@
             </div>
           </el-form-item> -->
           <el-form-item prop="cellPhone" :label="$t('userInfo.cellPhone')">
-            <el-input name="cellPhone" ref="cellPhone" v-model="ruleForm.cellPhone" autoComplete="off" :placeholder="$t('userInfo.cellPhonePlaceholder')"></el-input>
+            <el-input name="cellPhone" type="tel" ref="cellPhone" v-model="ruleForm.cellPhone" maxlength="11" autoComplete="off" :placeholder="$t('userInfo.cellPhonePlaceholder')"></el-input>
           </el-form-item>
           <el-form-item prop="crewStaff" :label="$t('userInfo.crewStaff')">
-            <el-input name="crewStaff" ref="crewStaff" v-model="ruleForm.crewStaff" autoComplete="off" :placeholder="$t('userInfo.crewStaffPlaceholder')"></el-input>
+            <el-input name="crewStaff" ref="crewStaff" v-model="ruleForm.crewStaff" minlength="2" maxlength="10" autoComplete="off" :placeholder="$t('userInfo.crewStaffPlaceholder')"></el-input>
           </el-form-item>
           <el-form-item prop="crewRealname" :label="$t('userInfo.crewRealname')">
-            <el-input name="crewRealname" ref="crewRealname" v-model="ruleForm.crewRealname" autoComplete="off" :placeholder="$t('userInfo.crewRealnamePlaceholder')"></el-input>
+            <el-input name="crewRealname" ref="crewRealname" v-model="ruleForm.crewRealname" minlength="2" maxlength="10" autoComplete="off" :placeholder="$t('userInfo.crewRealnamePlaceholder')"></el-input>
           </el-form-item>
           <el-form-item prop="oldPassword" :label="$t('changePassword.oldPassword')">
-            <el-input name="oldPassword" type="password" ref="oldPassword" v-model="ruleForm.oldPassword" autoComplete="off" :placeholder="$t('changePassword.oldPasswordPlaceholder')"></el-input>
+            <el-input name="oldPassword" type="password" ref="oldPassword" v-model="ruleForm.oldPassword" minlength="6" maxlength="30" autoComplete="off" :placeholder="$t('changePassword.oldPasswordPlaceholder')"></el-input>
           </el-form-item>
           <el-form-item prop="password" :label="$t('changePassword.password')">
-            <el-input name="password" type="password" ref="password" v-model="ruleForm.password" autoComplete="off" :placeholder="$t('changePassword.passwordPlaceholder')"></el-input>
+            <el-input name="password" type="password" ref="password" v-model="ruleForm.password" minlength="6" maxlength="30" autoComplete="off" :placeholder="$t('changePassword.passwordPlaceholder')"></el-input>
           </el-form-item>
           <el-form-item prop="rePassword" :label="$t('changePassword.rePassword')">
-            <el-input name="rePassword" type="password" ref="rePassword" v-model="ruleForm.rePassword" autoComplete="off" :placeholder="$t('changePassword.rePasswordPlaceholder')"></el-input>
+            <el-input name="rePassword" type="password" ref="rePassword" v-model="ruleForm.rePassword" minlength="6" maxlength="30" autoComplete="off" :placeholder="$t('changePassword.rePasswordPlaceholder')"></el-input>
           </el-form-item>
           <el-form-item prop="smsCellPhone" :label="$t('changePassword.smsCellPhone')">
-            <el-input name="smsCellPhone" ref="smsCellPhone" v-model="ruleForm.smsCellPhone" autoComplete="off" :placeholder="$t('userInfo.cellPhonePlaceholder')"></el-input>
+            <el-input name="smsCellPhone" ref="smsCellPhone" v-model="ruleForm.smsCellPhone" maxlength="11" autoComplete="off" :placeholder="$t('userInfo.cellPhonePlaceholder')"></el-input>
           </el-form-item>
           <el-form-item class="input-group" prop="verifcationCode" :label="$t('changePassword.verifcationCode')">
-            <el-input name="verifcationCode" type="tel" v-model="ruleForm.verifcationCode" ref="verifcationCode" autoComplete="off" :placeholder="$t('changePassword.verifcationCodePlaceholder')">
+            <el-input name="verifcationCode" type="tel" v-model="ruleForm.verifcationCode" ref="verifcationCode" maxlength="4" autoComplete="off" :placeholder="$t('changePassword.verifcationCodePlaceholder')">
             </el-input>
             <div class="input-group-btn">
               <el-button class="send-message" type="primary" @click.native.prevent="sendMsg" :disabled="this.sendMsgDisabled">
@@ -70,23 +70,17 @@
           <el-form-item prop="updateTime" :label="$t('form.updateTime')">
             <el-date-picker type="date" ref="updateTime" v-model="ruleForm.updateTime" :placeholder="$t('form.updateTimePlaceholder')">
             </el-date-picker>
-            <!-- <el-input 
-              name="updateTime" 
-              ref="updateTime" 
-              v-model="ruleForm.updateTime" 
-              autoComplete="off" 
-              :placeholder="$t('form.updateTimePlaceholder')"></el-input> -->
           </el-form-item>
-          <el-form-item :label="$t('products.quota')" required>
+          <el-form-item :label="$t('products.loanAmount')" required>
             <el-col :span="11">
-              <el-form-item prop="quotaLowerLimit">
-                <el-input name="quotaLowerLimit" type="number" ref="quotaLowerLimit" v-model="ruleForm.quotaLowerLimit" autoComplete="off" :placeholder="$t('products.quotaLowerLimitPlaceholder')"></el-input>
+              <el-form-item prop="loanAmountMin">
+                <el-input name="loanAmountMin" type="number" ref="loanAmountMin" v-model="ruleForm.loanAmountMin" autoComplete="off" :placeholder="$t('products.loanAmountMinPlaceholder')"></el-input>
               </el-form-item>
             </el-col>
             <el-col class="line" :span="2" style="text-align: center;">-</el-col>
             <el-col :span="11">
-              <el-form-item prop="quotaUpperLimit">
-                <el-input name="quotaUpperLimit" type="number" ref="quotaUpperLimit" v-model="ruleForm.quotaUpperLimit" autoComplete="off" :placeholder="$t('products.quotaUpperLimitPlaceholder')"></el-input>
+              <el-form-item prop="loanAmountMax">
+                <el-input name="loanAmountMax" type="number" ref="loanAmountMax" v-model="ruleForm.loanAmountMax" autoComplete="off" :placeholder="$t('products.loanAmountMaxPlaceholder')"></el-input>
               </el-form-item>
             </el-col>
           </el-form-item>
@@ -112,8 +106,8 @@ import {
   isvalidVerifcationCode,
   isvalidQuestion,
   isvalidAnswer,
-  isvalidQuotaLowerLimit,
-  isvalidQuotaUpperLimit
+  isvalidLoanAmountMin,
+  isvalidLoanAmountMax
 } from '@/utils/validate'
 import avatarUpload from 'vue-image-crop-upload'
 import errorConfig from '@/errorConfig'
@@ -183,17 +177,17 @@ export default {
         callback()
       }
     }
-    const validateQuotaLowerLimit = (rule, value, callback) => {
-      const inputQuotaLowerLimit = this.$refs.quotaLowerLimit
-      if (isvalidQuotaLowerLimit(inputQuotaLowerLimit, value)) {
+    const validateLoanAmountMin = (rule, value, callback) => {
+      const inputLoanAmountMin = this.$refs.loanAmountMin
+      if (isvalidLoanAmountMin(inputLoanAmountMin, value)) {
         callback()
       }
     }
-    const validateQuotaUpperLimit = (rule, value, callback) => {
-      const inputQuotaLowerLimit = this.$refs.quotaLowerLimit
-      const inputQuotaUpperLimit = this.$refs.quotaUpperLimit
-      const lowerLimitValue = this.$refs.quotaLowerLimit.currentValue
-      if (isvalidQuotaUpperLimit(inputQuotaUpperLimit, inputQuotaLowerLimit, value, lowerLimitValue)) {
+    const validateloanAmountMax = (rule, value, callback) => {
+      const inputLoanAmountMin = this.$refs.loanAmountMin
+      const inputloanAmountMax = this.$refs.loanAmountMax
+      const LoanAmountMinValue = this.$refs.loanAmountMin.currentValue
+      if (isvalidLoanAmountMax(inputloanAmountMax, inputLoanAmountMin, value, LoanAmountMinValue)) {
         callback()
       }
     }
@@ -213,8 +207,8 @@ export default {
         crewAdmin: '',
         answer: '',
         updateTime: '',
-        quotaUpperLimit: '',
-        quotaLowerLimit: '',
+        loanAmountMax: '',
+        LoanAmountMin: '',
         status: true
       },
       show: false,
@@ -262,11 +256,11 @@ export default {
         answer: [
           { required: true, validator: validateAnswer, trigger: 'blur' }
         ],
-        quotaLowerLimit: [
-          { required: true, validator: validateQuotaLowerLimit, trigger: 'blur' }
+        loanAmountMin: [
+          { required: true, validator: validateLoanAmountMin, trigger: 'blur' }
         ],
-        quotaUpperLimit: [
-          { required: true, validator: validateQuotaUpperLimit, trigger: 'blur' }
+        loanAmountMax: [
+          { required: true, validator: validateloanAmountMax, trigger: 'blur' }
         ]
       }
     }

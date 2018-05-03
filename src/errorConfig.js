@@ -22,8 +22,9 @@ export default {
   ER_QUESTION_EMPTY: '请输入问题',
   ER_ANSWER_EMPTY: '请输入答案',
   ER_UPDATETIME_EMPTY: '请选择时间',
-  ER_QUOTA_LOWER_LIMIT_EMPTY: '请输入额度下限',
-  ER_QUOTA_LOWER_LIMIT: '请输入额度下限',
-  ER_QUOTA_UPPER_LIMIT_EMPTY: '请输入额度上限',
-  ER_QUOTA_UPPER_LIMIT: '额度上限必须大于额度下限'
+  ER_LOAN_AMOUNT_MIN_EMPTY: '请输入贷款最低额度',
+  ER_LOAN_AMOUNT_MIN_FORMAT: '贷款最低额度格式不正确',
+  ER_LOAN_AMOUNT_MAX_EMPTY: '请输入贷款贷款最高额度',
+  ER_LOAN_AMOUNT_MAX_FORMAT: '贷款最高额度格式不正确',
+  ER_LOAN_AMOUNT_MAX_RANGE: '最高贷款额度大于最小额度'
 }

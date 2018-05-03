@@ -141,72 +141,55 @@ export function isvalidCrewRealname(obj, value) {
 export function isvalidVerifcationCode(obj, value) {
   const inputValue = value
 
-  if (!isvalidEmpty(null, inputValue, 'ER_VERIFICATION_EMPTY')) {
-    return false
-  }
-  return true
+  return isvalidEmpty(null, inputValue, 'ER_VERIFICATION_EMPTY')
 }
 
 export function isvalidSignInUsername(obj, value) {
   const usernameObj = obj
   const inputValue = value
 
-  if (!isvalidEmpty(usernameObj, inputValue, 'ER_SIGNIN_USERNAME')) {
-    return false
-  }
-  return true
+  return isvalidEmpty(usernameObj, inputValue, 'ER_SIGNIN_USERNAME')
 }
 
 export function isvalidSignInPassword(obj, value) {
   const passwordObj = obj
   const inputValue = value
 
-  if (!isvalidEmpty(passwordObj, inputValue, 'ER_SIGNIN_PASSWORD')) {
-    return false
-  }
-  return true
+  return isvalidEmpty(passwordObj, inputValue, 'ER_SIGNIN_PASSWORD')
 }
 
 export function isvalidQuestion(obj, value) {
   const questionObj = obj
   const inputValue = value
 
-  if (!isvalidEmpty(questionObj, inputValue, 'ER_QUESTION_EMPTY')) {
-    return false
-  }
-  return true
+  return isvalidEmpty(questionObj, inputValue, 'ER_QUESTION_EMPTY')
 }
 
 export function isvalidAnswer(obj, value) {
   const answerObj = obj
   const inputValue = value
 
-  if (!isvalidEmpty(answerObj, inputValue, 'ER_ANSWER_EMPTY')) {
-    return false
-  }
-  return true
+  return isvalidEmpty(answerObj, inputValue, 'ER_ANSWER_EMPTY')
 }
 
 export function isvalidUpdateTime(obj, value) {
   const updateTimeObj = obj
   const inputValue = value
 
-  if (!isvalidEmpty(updateTimeObj, inputValue, 'ER_UPDATETIME_EMPTY')) {
-    return false
-  }
-  return true
+  return isvalidEmpty(updateTimeObj, inputValue, 'ER_UPDATETIME_EMPTY')
 }
 
-export function isvalidQuotaLowerLimit(obj, value) {
-  const quotaLowerLimitObj = obj
-  const inputValue = value
-  if (!isvalidEmpty(quotaLowerLimitObj, inputValue, 'ER_QUOTA_LOWER_LIMIT_EMPTY')) {
+export function isvalidLoanAmountMin(obj, value) {
+  const loanAmountMinObj = obj
+  const inputValue = parseFloat(value)
+  if (!isvalidEmpty(loanAmountMinObj, inputValue, 'ER_LOAN_AMOUNT_MIN_EMPTY')) {
     return false
   }
 
+  console.log(typeof inputValue)
   if (!Number.isInteger(inputValue)) {
     Message({
-      message: errorConfig.ER_QUOTA_LOWER_LIMIT,
+      message: errorConfig.ER_LOAN_AMOUNT_MIN_FORMAT,
       type: 'error'
     })
     return false
@@ -215,31 +198,31 @@ export function isvalidQuotaLowerLimit(obj, value) {
   return true
 }
 
-export function isvalidQuotaUpperLimit(obj, prevObj, value, lowerLimitValue) {
-  const quotaUpperLimitObj = obj
-  const quotaLowerLimitObj = prevObj
-  const inputValue = value
-  const inputLowerLimitValue = lowerLimitValue
+export function isvalidLoanAmountMax(obj, prevObj, value, minValue) {
+  const quotaLoanAmountMax = obj
+  const loanAmountMinObj = prevObj
+  const inputValue = parseFloat(value)
+  const inpuMinValue = minValue
 
-  if (!isvalidEmpty(quotaLowerLimitObj, inputLowerLimitValue, 'ER_QUOTA_LOWER_LIMIT_EMPTY')) {
+  if (!isvalidEmpty(loanAmountMinObj, inpuMinValue, 'ER_LOAN_AMOUNT_MIN_EMPTY')) {
     return false
   }
 
-  if (!isvalidEmpty(quotaUpperLimitObj, inputValue, 'ER_QUOTA_UPPER_LIMIT_EMPTY')) {
+  if (!isvalidEmpty(quotaLoanAmountMax, inputValue, 'ER_LOAN_AMOUNT_MAX_EMPTY')) {
     return false
   }
 
   if (!Number.isInteger(inputValue)) {
     Message({
-      message: errorConfig.ER_QUOTA_UPPER_LIMIT,
+      message: errorConfig.ER_LOAN_AMOUNT_MAX_FORMAT,
       type: 'error'
     })
     return false
   }
 
-  if (inputValue <= inputLowerLimitValue) {
+  if (inputValue <= inpuMinValue) {
     Message({
-      message: errorConfig.ER_QUOTA_UPPER_LIMIT,
+      message: errorConfig.ER_LOAN_AMOUNT_MAX_RANGE,
       type: 'error'
     })
     return false

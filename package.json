@@ -6,7 +6,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --port 8848 --config  build/webpack.dev.conf.js --host 192.168.0.139",
+    "dev": "webpack-dev-server --inline --progress --config  build/webpack.dev.conf.js",
+    "dev:serv": "webpack-dev-server --inline --progress --port 8848 --config  build/webpack.dev.conf.js --host 192.168.0.139",
     "build:prod": "cross-env NODE_ENV=production env_config=prod node build/build.js",
     "build:sit": "cross-env NODE_ENV=production env_config=sit node build/build.js",
     "lint": "eslint --ext .js,.vue src",

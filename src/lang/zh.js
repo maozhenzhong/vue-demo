@@ -95,11 +95,11 @@ export default {
     viewTitle: '查看员工信息'
   },
   products: {
-    quota: '额度',
-    quotaUpperLimit: '额度上限',
-    quotaUpperLimitPlaceholder: '请输入额度上限',
-    quotaLowerLimit: '额度下限',
-    quotaLowerLimitPlaceholder: '请输入额度下限'
+    loanAmount: '贷款额度',
+    loanAmountMin: '贷款最低额度',
+    loanAmountMinPlaceholder: '请输入贷款最低额度',
+    loanAmountMax: '贷款最高额度',
+    loanAmountMaxPlaceholder: '请输入贷款最高额度'
   },
   table: {
     actions: '操作',
