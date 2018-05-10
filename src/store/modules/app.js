@@ -8,7 +8,7 @@ const app = {
       opened: !+Cookies.get('sidebarStatus')
     },
     language: Cookies.get('language') || 'zh',
-    theme: Cookies.get('theme') || 'dark'
+    theme: Cookies.get('theme') || 'jack'
   },
   mutations: {
     TOGGLE_SIDEBAR: state => {

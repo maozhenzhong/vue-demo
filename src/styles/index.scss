@@ -1,4 +1,5 @@
 @import './variables.scss';
+@import './themeJack.scss';
 @import './themeDark.scss';
 @import './themeLight.scss';
 @import './mixin.scss';
@@ -91,9 +92,9 @@ a:hover {
   }
 }
 
-.hidden-md {
-  display: block;
-}
+// .hidden-md {
+//   display: block;
+// }
 
 @media only screen and (max-width: 768px) {
   .hidden-md {
@@ -102,6 +103,7 @@ a:hover {
 }
 
 .container-fluid {
+  position: relative;
   padding: 12px;
   border-radius: 6px;
 }
@@ -155,8 +157,8 @@ a:hover {
     width: 58px;
     height: 58px;
     line-height: 58px;
-    border-right: 1px solid #ebeef5;
-    border-left: 1px solid #ebeef5;
+    // border-right: 1px solid #ebeef5;
+    // border-left: 1px solid #ebeef5;
   }
 
   .global-search {
@@ -180,9 +182,6 @@ a:hover {
       display: inline-block;
       vertical-align: top;
       line-height: 28px;
-      &:hover {
-        // background-color:;
-      }
     }
   }
 
@@ -212,7 +211,7 @@ a:hover {
   display: inline-block;
   overflow: hidden;
   vertical-align: top;
-  background-image: url(../assets/img/logo_mini.png) !important;
+  background-image: url('../assets/img/logo_mini.png') !important;
   background-repeat: no-repeat;
   background-position: 50% 50%;
 }
@@ -220,7 +219,7 @@ a:hover {
 @media (min-width: 768px) {
   .logo {
     width: 190px;
-    background-image: url(../assets/img/logo_light.png) !important;
+    // background-image: url("../assets/img/logo_light.png") !important;
   }
 }
 
@@ -229,7 +228,7 @@ a:hover {
   margin-bottom: 12px;
   vertical-align: top;
   dt {
-    width: 80px;
+    width: 120px;
     float: left;
     clear: left;
     overflow: hidden;
@@ -248,7 +247,7 @@ a:hover {
 }
 @media (min-width: 768px) {
   .dl-horizontal dd {
-    margin-left: 92px;
+    margin-left: 132px;
   }
 }
 
@@ -365,8 +364,10 @@ a:hover {
   font-size: 0;
 
   @include clearfix;
+
   .filter-item {
     display: inline-block;
+    width: 100%;
   }
   .left {
     .filter-item + .filter-item {
@@ -378,6 +379,10 @@ a:hover {
       margin-top: 12px;
     }
   }
+
+  .el-button {
+    width: 100%;
+  }
 }
 @media (min-width: 768px) {
   .filter-bar {
@@ -387,6 +392,7 @@ a:hover {
     @include clearfix;
     .filter-item {
       display: inline-block;
+      width: auto;
     }
     .left {
       .filter-item + .filter-item {
@@ -397,8 +403,12 @@ a:hover {
     .right {
       .filter-item + .filter-item {
         margin-top: 0;
-        margin-right: 12px;
+        margin-left: 12px;
       }
+    }
+
+    .el-button {
+      width: auto;
     }
   }
 }
@@ -424,4 +434,117 @@ a:hover {
 }
 .link-type {
   cursor: pointer;
+}
+
+.avatar-uploader .el-upload {
+  border: 1px dashed $theme-jack-white;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.avatar-uploader .avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 128px;
+  height: 128px;
+  line-height: 128px;
+  text-align: center;
+}
+
+.crew-info {
+  position: relative;
+  padding: 12px 0;
+
+  .edit-link {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 100;
+  }
+
+  .dl-horizontal {
+    dt,
+    dd {
+      padding: 6px 0;
+      line-height: 28px;
+    }
+  }
+}
+
+.el-select > .el-input {
+  width: 120px !important;
+}
+
+.el-date-editor.el-input,
+.el-date-editor.el-input__inner {
+  width: 100%;
+}
+
+.el-form {
+  width: 100%;
+
+  .el-select {
+    display: block;
+    & > .el-input {
+      width: 100% !important;
+    }
+  }
+
+  .el-button-block {
+    display: block;
+    width: 100%;
+  }
+
+  .el-radio {
+    display: block;
+    margin: 0;
+    line-height: 36px;
+  }
+
+  .el-radio + .el-radio {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .el-form {
+    max-width: 360px;
+
+    .el-radio {
+      display: inline-block;
+      margin: 0;
+      width: 50%;
+    }
+
+    .el-radio + .el-radio {
+      margin-left: 0;
+    }
+  }
+}
+
+.tabs-side-menu {
+  position: absolute;
+  top: 14px;
+  right: 15px;
+  z-index: 1000;
+  transition: all 0.2s linear;
+
+  .icon-close {
+    font-size: 24px;
+    line-height: 24px;
+    opacity: 0.6;
+    cursor: pointer;
+  }
+
+  &:hover {
+    .icon-close {
+      opacity: 1;
+    }
+  }
+}
+
+.el-button--medium {
+  padding: 8px 12px;
 }

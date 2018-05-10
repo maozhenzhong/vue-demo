@@ -1,6 +1,19 @@
 .light {
   background-color: $theme-light-body-bg;
 
+  .headerBar {
+    .hamburger-container {
+      border-right: 1px solid #ebeef5;
+      border-left: 1px solid #ebeef5;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .logo {
+      background-image: url('../assets/img/logo_light.png') !important;
+    }
+  }
+
   a,
   .el-tabs__item.is-active,
   .el-tabs__item:hover {
@@ -55,12 +68,12 @@
   }
 
   .el-submenu {
-
     .el-menu {
       background-color: $theme-light-sidebar-group-active !important;
     }
 
-    .el-menu-item:focus, .el-menu-item:hover {
+    .el-menu-item:focus,
+    .el-menu-item:hover {
       background-color: $theme-light-sidebar-item-active;
     }
   }
@@ -104,21 +117,17 @@
   }
 
   .panel {
-
     .panel-heading {
       border-color: $theme-light-border-300 !important;
 
       .panel-title {
-
         &::before {
-          background-color: $theme-light-base
+          background-color: $theme-light-base;
         }
       }
 
       right-menu {
-
         .navbar {
-
           li {
             &.active {
               a {
@@ -138,12 +147,11 @@
     border-color: $theme-light-border-300 !important;
 
     &::before {
-        background-color: $theme-light-base
-      }
+      background-color: $theme-light-base;
+    }
   }
 
   .reference-info {
-
     .tabs-item {
       border: 1px solid $theme-light-border-300 !important;
 
@@ -153,16 +161,14 @@
       }
     }
   }
-  
-  .userinfo-side {
 
+  .userinfo-side {
     .avatar-info {
       background-color: $theme-light-body-bg;
     }
 
     .easy-navigation {
       .navbar {
-
         li {
           a.router-link-active {
             color: $theme-light-base;
@@ -185,6 +191,35 @@
         }
       }
     }
+  }
+  .signIn-container {
+    background-image: url('../assets/img/login_pc_bg.jpg');
+  }
+
+  @media (min-width: 768px) {
+    .login-container {
+      background-image: url('../assets/img/login_pad_bg.jpg');
+    }
+  }
+
+  @media (min-width: 1176px) {
+    .signIn-container {
+      background-image: url('../assets/img/login_pc_bg.jpg');
+    }
+  }
+
+  .meter-bar {
+    .el-row {
+      .el-col {
+        &::before {
+          background-color: #ebeef5;
+        }
+      }
+    }
+  }
+
+  .copy {
+    background-color: $theme-light-sidebar-bg;
   }
 }
 

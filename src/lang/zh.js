@@ -7,6 +7,8 @@ export default {
     company: '认证企业',
     administrator: '管理员',
     crew: '人员管理',
+    showCrew: '查看人员信息',
+    editCrew: '编辑人员',
     bankInstitutions: '银行管理',
     bank: '银行机构',
     uCenter: '个人中心',
@@ -27,7 +29,8 @@ export default {
     label: '标签',
     systemLabel: '系统标签',
     userLable: '用户标签审核',
-    formControl: '表单控件'
+    formControl: '表单控件',
+    copy: '© 2018 企信云'
   },
   headerBar: {
     logo: '宜昌市中小微企业和农村信用信息共享服务平台',
@@ -38,73 +41,68 @@ export default {
     screenfull: '全屏',
     theme: '换肤',
     dark: '暗色',
-    light: '亮色'
+    light: '亮色',
+    jack: '绿色'
   },
   signIn: {
     title: '宜昌市中小微企业和农村信用信息共享服务平台',
     logIn: '登录',
-    cellPhonePlaceholder: '请输入手机号码',
+    cellphonePlaceholder: '请输入手机号码',
     passwordPlaceholder: '请输入密码',
     loginIndex: '登录宜昌市中小微企业和农村信用信息共享服务平台官网',
-    description: '““宜昌市中小微企业和农村信用信息共享服务平台”网站具有为政府公共管理信息归集、交换、公示及金融产品展示等各类网上服务功能；建立信息采集、信用评价、信用服务、异议处理等功能的信用信息共享服务平台；为建成全面的农村信用主体数据库，围绕信用信息金融应用提供“一站式”服务。'
+    description: '“宜昌市中小微企业和农村信用信息共享服务平台”网站具有为政府公共管理信息归集、交换、公示及金融产品展示等各类网上服务功能；建立信息采集、信用评价、信用服务、异议处理等功能的信用信息共享服务平台；为建成全面的农村信用主体数据库，围绕信用信息金融应用提供“一站式”服务。'
   },
   userInfo: {
     userInfo: '个人信息',
     bankInfo: '银行信息',
     changePassword: '修改密码',
-    cellPhone: '手机号',
-    cellPhonePlaceholder: '请输入手机号码',
-    crewStaff: '员工编号',
-    crewStaffPlaceholder: '请输入员工编号',
+    cellphone: '手机号',
+    crewStaff: '工号',
     crewUserGroup: '所属银行',
-    crewUserGroupPlaceholder: '请输入所属银行',
     crewRealname: '员工姓名',
-    crewRealnamePlaceholder: '请输入姓名',
-    setAvatar: '设置头像',
+    crewAvatar: '头像',
     submit: '提交'
   },
   changePassword: {
     oldPassword: '原密码',
     password: '新密码',
     rePassword: '确认密码',
-    oldPasswordPlaceholder: '请输入原始密码',
-    passwordPlaceholder: '请输入新密码',
-    rePasswordPlaceholder: '请确认新密码',
     submit: '提交',
-    cellPhone: '手机号码',
-    smsCellPhone: '手机号码',
+    cellphone: '手机号码',
+    smscellphone: '手机号码',
     verifcationCode: '短信验证码',
     sendMessages: '发送短信',
-    cellPhonePlaceholder: '请输入手机号码',
-    verifcationCodePlaceholder: '请输入短信验证码',
     authentication: '身份验证'
   },
   filter: {
     selectPlaceholder: '请选择',
-    searchPlaceholder: '员工编号/手机号',
+    searchPlaceholder: '工号/手机号',
     searchBtn: '搜索',
+    export: '导出',
     add: '新增'
   },
   crew: {
-    crewStaff: '员工编号',
-    crewRealname: '姓名',
-    crewCellPhone: '手机号码',
-    crewRole: '角色',
-    crewUsergroup: '所属银行',
-    crewStatus: '状态',
-    viewTitle: '查看员工信息'
+    title: '人员信息',
+    staff: '工号',
+    name: '姓名',
+    avatar: '头像',
+    cellphone: '手机号码',
+    role: '角色',
+    bank: '所属银行',
+    status: '状态',
+    showTitle: '查看员工信息',
+    editCrew: '编辑/新增信息',
+    submit: '提交'
   },
   products: {
     loanAmount: '贷款额度',
     loanAmountMin: '贷款最低额度',
-    loanAmountMinPlaceholder: '请输入贷款最低额度',
-    loanAmountMax: '贷款最高额度',
-    loanAmountMaxPlaceholder: '请输入贷款最高额度'
+    loanAmountMax: '贷款最高额度'
   },
   table: {
     actions: '操作',
-    modify: '修改',
-    view: '查看',
+    edit: '编辑',
+    show: '查看',
     enable: '启用',
     disabled: '禁用',
     loadingText: '正在加载中，请耐心等待...'
@@ -123,12 +121,26 @@ export default {
     answer: '答案',
     answerPlaceholder: '请输入答案'
   },
+  action: {
+    close: '关闭'
+  },
   form: {
     usergroup: '所属机构',
-    usergroupPlaseholder: '请选择银行机构',
-    role: '角色',
+    cellphone: '手机号',
+    staff: '员工编号',
+    name: '姓名',
+    password: '密码',
+    oldPassword: '原密码',
+    rePassword: '确认密码',
+    verificationCode: '验证码',
+    sendMessages: '发送验证码',
+    bank: '所属银行',
+    question: '问题',
+    answer: '答案',
     updateTime: '更新时间',
-    updateTimePlaceholder: '请选择更新时间'
+    loanAmountMin: '贷款最低额度',
+    loanAmountMax: '贷款最高额度',
+    role: '角色'
   },
   components: {
     documentation: '文档',

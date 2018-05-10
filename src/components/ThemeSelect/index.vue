@@ -6,6 +6,7 @@
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item command="light" :disabled="theme === 'light'">{{$t('headerBar.light')}}</el-dropdown-item>
       <el-dropdown-item command="dark" :disabled="theme === 'dark'">{{$t('headerBar.dark')}}</el-dropdown-item>
+      <el-dropdown-item command="jack" :disabled="theme === 'jack'">{{$t('headerBar.jack')}}</el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
 </template>

@@ -1,4 +1,4 @@
-import { signInByCellPhone, signOut, getUserInfo } from '@/api/signIn'
+import { signOut, getUserInfo } from '@/api/signIn'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 
 const user = {
@@ -19,9 +19,6 @@ const user = {
   mutations: {
     SET_CODE: (state, code) => {
       state.code = code
-    },
-    SET_TOKEN: (state, token) => {
-      state.token = token
     },
     SET_INTRODUCTION: (state, introduction) => {
       state.introduction = introduction
@@ -44,19 +41,6 @@ const user = {
   },
 
   actions: {
-    SignInByCellPhone({ commit }, userInfo) {
-      return new Promise((resolve, reject) => {
-        signInByCellPhone(userInfo.cellPhone, userInfo.password).then(response => {
-          const data = response.data
-          commit('SET_TOKEN', data.token)
-          setToken(response.data.token)
-          resolve()
-        }).catch(error => {
-          reject(error)
-        })
-      })
-    },
-
     GetUserInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
         getUserInfo(state.token).then(response => {
@@ -76,6 +60,7 @@ const user = {
     },
 
     SignOut({ commit, state }) {
+      console.log(state)
       return new Promise((resolve, reject) => {
         signOut(state.token).then(() => {
           commit('SET_TOKEN', '')

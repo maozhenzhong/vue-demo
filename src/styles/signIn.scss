@@ -26,20 +26,19 @@
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-image: url("../../assets/img/login_mobile_bg.jpg");
   background-repeat: no-repeat;
-  background-attachment:fixed;
+  background-attachment: fixed;
   background-position: 50% 0;
   background-size: cover;
 
   .signIn-wrap {
+    position: relative;
+    z-index: 1;
     padding: 24px;
   }
 
   .el-input {
-
     input {
-
       &:-webkit-autofill {
         -webkit-box-shadow: 0 0 0px 1000px #6a7da5 inset !important;
 
@@ -58,7 +57,7 @@
     width: 251.5px;
     height: 0;
     overflow: hidden;
-    background-image: url("../../assets/img/login_mobile_title.png");
+    background-image: url('../../assets/img/login_mobile_title.png');
     background-repeat: no-repeat;
     background-position: 50% 0;
     background-size: 100% 100%;
@@ -104,7 +103,6 @@
     }
 
     .el-input {
-
       .el-input__inner {
         padding-right: 20px;
         padding-left: 40px;
@@ -133,7 +131,7 @@
   .mobile-signIn-content {
     margin-bottom: 12px;
     border-radius: 20px;
-    background-color: rgba(255,255,255,.3);
+    background-color: rgba(255, 255, 255, 0.3);
     // overflow: hidden;
 
     .el-form-item {
@@ -145,7 +143,7 @@
     }
 
     .el-form-item + .el-form-item {
-      border-top: 1px solid rgba(255,255,255,.5);
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
     }
 
     .el-form-item:nth-child(1) {
@@ -168,7 +166,6 @@
   margin-bottom: 12px;
 
   ._nc {
-
     .stage1 {
       height: 40px;
 
@@ -234,16 +231,11 @@
   height: 40px;
   display: block;
   border: 0;
-  border-radius: 4px;
-  background-color: rgba(255,255,255,.3);
 }
 
 @media (min-width: 768px) {
   .login-container {
-    background-image: url("../../assets/img/login_pad_bg.jpg");
-
     .system-introduction {
-
       .system-description,
       .index-link {
         display: none;
@@ -257,7 +249,7 @@
     .system-logo {
       padding-top: 131px;
       width: 503px;
-      background-image: url("../../assets/img/login_pad_title.png");
+      background-image: url('../../assets/img/login_pad_title.png');
     }
 
     .system-description,
@@ -268,7 +260,7 @@
 
   .signIn-form {
     min-height: 340px;
-    background-color: rgba(255,255,255,.3);
+    background-color: rgba(255, 255, 255, 0.3);
 
     .mobile-signIn-content {
       margin-bottom: 24;
@@ -279,7 +271,7 @@
         margin-bottom: 12px;
 
         .el-input__inner {
-          border: 1px solid rgba(255,255,255,.5);
+          border: 1px solid rgba(255, 255, 255, 0.5);
           border-radius: 6px;
         }
       }
@@ -303,18 +295,10 @@
       }
     }
   }
-
-  .signIn-btn {
-    border: 1px solid #409EFF;
-    border-radius: 4px;
-    background-color: #409EFF;
-  }
 }
 
 @media (min-width: 1176px) {
   .signIn-container {
-    background-image: url("../../assets/img/login_pc_bg.jpg");
-
     .signIn-wrap {
       position: fixed;
       top: 50%;
@@ -322,12 +306,12 @@
       z-index: 100;
       padding: 0;
       width: 1176px;
-      transform: translate3d(-50%,-50%,0);
+      transform: translate3d(-50%, -50%, 0);
 
       &::after {
         display: table;
         clear: both;
-        content: "";
+        content: '';
       }
 
       .system-introduction {
@@ -339,7 +323,7 @@
           margin-bottom: 40px;
           padding-top: 193px;
           width: 719px;
-          background-image: url("../../assets/img/login_pc_title.png");
+          background-image: url('../../assets/img/login_pc_title.png');
         }
 
         .system-description,
@@ -361,7 +345,6 @@
         }
 
         .index-link {
-
           a {
             margin-left: 12px;
             height: 48px;

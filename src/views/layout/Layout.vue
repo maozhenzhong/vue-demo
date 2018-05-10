@@ -5,13 +5,12 @@
       <sidebar class="sidebar-container"></sidebar>
       <breadcrumb class="breadcrumb-container"></breadcrumb>
       <app-main></app-main>
-      <footer-bar></footer-bar>
     </div>
   </div>
 </template>
 
 <script>
-import { HeaderBar, Sidebar, AppMain, FooterBar } from './components'
+import { HeaderBar, Sidebar, AppMain } from './components'
 import Breadcrumb from '@/components/Breadcrumb'
 import bowser from 'bowser'
 
@@ -21,8 +20,7 @@ export default {
     HeaderBar,
     Breadcrumb,
     Sidebar,
-    AppMain,
-    FooterBar
+    AppMain
   },
   mounted() {
     if (bowser.mobile) {

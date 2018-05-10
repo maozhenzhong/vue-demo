@@ -3,53 +3,57 @@
     <!-- 搜索 -->
     <div class="filter-bar">
       <div class="left">
-        <el-select class="select-usergroup filter-item" v-model="listQuery.crewUsergroup" :placeholder="$t('filter.selectPlaceholder')">
-          <el-option v-for="item in userGroupOptions" :key="item.key" :label="item.usergroup" :value="item.key">
-          </el-option>
-        </el-select>
         <div class="search-component filter-item">
-          <el-input class="search-input" :placeholder="$t('filter.searchPlaceholder')">
+          <el-input placeholder="请输入内容" class="input-with-select">
+            <el-select v-model="listQuery.bank" slot="prepend" placeholder="请选择">
+              <el-option v-for="item in bankOptions" :key="item.key" :label="item.bank" :value="item.key"></el-option>
+            </el-select>
+            <el-button slot="append" icon="el-icon-search"></el-button>
           </el-input>
-          <el-button class="search-btn" type="primary" icon="el-icon-search">{{$t('filter.searchBtn')}}</el-button>
         </div>
       </div>
       <div class="right">
-        <el-button class="filter-item" type="primary" icon="el-icon-edit">{{$t('filter.add')}}</el-button>
+        <el-row :gutter="10">
+          <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
+            <router-link to="/crew/editCrew/-1">
+              <el-button class="btn-add" type="success" icon="el-icon-edit" plain>{{$t('filter.add')}}</el-button>
+            </router-link>
+          </el-col>
+          <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
+            <el-button type="primary" :loading="downloadLoading" icon="el-icon-download" @click="handleDownload" plain>{{$t('filter.export')}}</el-button>
+          </el-col>
+        </el-row>
       </div>
     </div>
     <!-- 列表 -->
-    <el-table :data="crewList" v-loading="crewListLoading" :element-loading-text="$t('table.loadingText')" border fit style="width: 100%">
-      <el-table-column :label="$t('crew.crewStaff')" align="center" width="140">
+    <el-table :data="crewList" v-loading="crewLoading" :element-loading-text="$t('table.loadingText')" border :default-sort="{prop: 'status', order: 'descending'}">
+      <el-table-column :label="$t('crew.name')" prop="name" sortable align="center" min-width="150">
         <template slot-scope="scope">
-          <span>{{ scope.row.crewStaff }}</span>
+          <!-- <router-link class="edit-link" :to="'/crew/showCrew/' + scope.row.id">{{ scope.row.name }}</router-link> -->
+          <a class="link-type" @click="handleView(scope.row)">{{ scope.row.name }}</a>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('crew.crewRealname')" align="center" width="140">
+      <el-table-column class-name="hidden-md" :label="$t('crew.cellphone')" prop="cellphone" align="center" min-width="140">
         <template slot-scope="scope">
-          <a class="link-type" @click="handleView(scope.row)">{{ scope.row.crewRealname }}</a>
+          <span>{{ scope.row.cellphone }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('crew.crewCellPhone')" align="center" width="140">
+      <el-table-column class-name="hidden-md" :label="$t('crew.role')" prop="role" min-width="140">
         <template slot-scope="scope">
-          <span>{{ scope.row.crewCellPhone }}</span>
+          <span>{{ scope.row.role.name }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('crew.crewRole')">
+      <el-table-column class-name="hidden-md" :label="$t('crew.bank')" prop="bank" sortable min-width="220">
         <template slot-scope="scope">
-          <span>{{ scope.row.crewRole }}</span>
+          <span>{{ scope.row.bank.name }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('crew.crewUsergroup')">
+      <el-table-column class-name="hidden-md" align="center" :label="$t('crew.status')" prop="status" sortable width="100">
         <template slot-scope="scope">
-          <span>{{ scope.row.crewUsergroup | userGroupFilter }}</span>
+          <el-tag :type="scope.row.status | statusFilterByTag">{{scope.row.status | statusFilter}}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column align="center" :label="$t('crew.crewStatus')" width="100">
-        <template slot-scope="scope">
-          <el-tag :type="scope.row.crewStatus | statusFilterByTag">{{scope.row.crewStatus | statusFilter}}</el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column fixed="right" align="center" :label="$t('table.actions')" width="120">
+      <el-table-column align="center" :label="$t('table.actions')" min-width="120">
         <template slot-scope="scope">
           <el-dropdown>
             <span class="el-dropdown-link">
@@ -57,13 +61,17 @@
               <i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>{{$t('table.modify')}}</el-dropdown-item>
-              <el-dropdown-item>{{$t('table.view')}}</el-dropdown-item>
-              <el-dropdown-item v-if="scope.row.crewStatus!==0">
-                <a @click="handleModifyStatus(scope.row, 0)">{{$t('table.enable')}}</a>
+              <el-dropdown-item>
+                <router-link :to="'/crew/editCrew/' + scope.row.id"> {{$t('table.edit')}}</router-link>
               </el-dropdown-item>
-              <el-dropdown-item v-if="scope.row.crewStatus!==1">
-                <a @click="handleModifyStatus(scope.row, 1)">{{$t('table.disabled')}}</a>
+              <el-dropdown-item>
+                <router-link :to="'/crew/showCrew/' + scope.row.id">{{$t('table.show')}}</router-link>
+              </el-dropdown-item>
+              <el-dropdown-item v-if="scope.row.status!==0">
+                <a @click="handleEditStatus(scope.row, 0)">{{$t('table.enable')}}</a>
+              </el-dropdown-item>
+              <el-dropdown-item v-if="scope.row.status!==1">
+                <a @click="handleEditStatus(scope.row, 1)">{{$t('table.disabled')}}</a>
               </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
@@ -72,29 +80,28 @@
     </el-table>
     <!-- 分页 -->
     <div class="pagination-container">
-      <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="listQuery.page" :page-sizes="[10, 20, 30, 50]" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="total">
+      <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="listQuery.page" :page-sizes="[10, 20, 30, 50]" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next" :total="total">
       </el-pagination>
     </div>
 
-    <el-dialog :title="$t('crew.viewTitle')" :visible.sync="crewDialogVisible" width="390px">
+    <!-- 弹出显示 -->
+    <el-dialog :title="$t('crew.title')" :visible.sync="crewDialogVisible" width="390px">
       <div class="crew-info-container">
         <div class="crew-info-avatar">
           <figure class="avatar">
-            <img :src="crewInfo.avatar">
+            <!-- <img :src="crewInfo.avatar"> -->
           </figure>
         </div>
         <div class="crew-info-content">
           <dl class="dl-horizontal">
-            <dt>{{$t('crew.crewRealname')}}</dt>
-            <dd>{{crewInfo.crewRealname}}</dd>
-            <dt>{{$t('crew.crewStaff')}}</dt>
-            <dd>{{crewInfo.crewStaff}}</dd>
-            <dt>{{$t('crew.crewUsergroup')}}</dt>
-            <dd>{{crewInfo.crewUsergroup.name}}</dd>
-            <dt>{{$t('crew.crewCellPhone')}}</dt>
-            <dd>{{crewInfo.crewCellPhone}}</dd>
-            <dt>{{$t('crew.crewRole')}}</dt>
-            <dd>{{crewInfo.crewRole}}</dd>
+            <dt>{{$t('crew.name')}}</dt>
+            <dd>{{crewInfo.name}}</dd>
+            <dt>{{$t('crew.cellphone')}}</dt>
+            <dd>{{crewInfo.cellphone}}</dd>
+            <dt>{{$t('crew.bank')}}</dt>
+            <dd>{{crewInfo.bank.name}}</dd>
+            <dt>{{$t('crew.role')}}</dt>
+            <dd>{{crewInfo.role.name}}</dd>
           </dl>
         </div>
       </div>
@@ -108,47 +115,46 @@
 <script>
 import { fetchList } from '@/api/crew'
 import promptConfig from '@/promptConfig'
+import { parseTime } from '@/utils'
 
-const userGroupOptions = [
-  { key: 'BOC', usergroup: '中国银行' },
-  { key: 'CMB', usergroup: '招商银行' },
-  { key: 'CCB', usergroup: '中国建设银行' },
-  { key: 'CEB', usergroup: '中国光大银行' },
-  { key: 'ABC', usergroup: '中国农业银行' },
-  { key: 'CMBC', usergroup: '中国民生银行' },
-  { key: 'CIB', usergroup: '兴业银行' }
+const bankOptions = [
+  { key: 'BOC', bank: '中国银行' },
+  { key: 'CMB', bank: '招商银行' },
+  { key: 'CCB', bank: '中国建设银行' },
+  { key: 'CEB', bank: '中国光大银行' },
+  { key: 'ABC', bank: '中国农业银行' },
+  { key: 'CMBC', bank: '中国民生银行' },
+  { key: 'CIB', bank: '兴业银行' }
 ]
-const userGroupOptionsValue = userGroupOptions.reduce((acc, cur) => {
-  acc[cur.key] = cur.usergroup
-  return acc
-}, {})
+
 export default {
   name: 'crew',
   data() {
     return {
-      userGroupOptions,
+      bankOptions,
       selectedValue: '',
       crewList: [],
       crewInfo: {
-        avatar: null,
-        crewCellPhone: null,
-        crewRealname: null,
-        crewRole: null,
-        crewStaff: null,
-        crewStatus: null,
-        crewUsergroup: {
-          id: null,
-          name: null
+        name: '',
+        cellphone: '',
+        bank: {
+          id: '',
+          name: ''
+        },
+        role: {
+          id: '',
+          name: ''
         }
       },
       total: 0,
-      crewListLoading: true,
+      crewLoading: true,
+      downloadLoading: false,
       listQuery: {
         page: 1,
-        limit: 20,
+        limit: 10,
         importance: undefined,
         title: undefined,
-        crewUsergroup: {
+        bank: {
           id: null,
           name: null
         },
@@ -167,13 +173,10 @@ export default {
     },
     statusFilterByTag(status) {
       const statusMap = {
-        0: 'primary',
+        0: 'success',
         1: 'danger'
       }
       return statusMap[status]
-    },
-    userGroupFilter(type) {
-      return userGroupOptionsValue[type]
     }
   },
   created() {
@@ -181,20 +184,33 @@ export default {
   },
   methods: {
     getList() {
-      this.crewListLoading = true
+      this.crewLoading = true
       fetchList(this.listQuery).then(response => {
         console.log(response)
-        this.crewList = response.data.items
+        this.crewList = response.data.data
         this.total = response.data.total
-        this.crewListLoading = false
+        this.crewLoading = false
       })
     },
-    handleModifyStatus(row, status) {
-      this.$message({
-        message: promptConfig.SUCCESSFUL_OPERATION,
-        type: 'success'
+    handleEditStatus(row, status) {
+      this.$confirm('确认审核该人员？', '人员审核', {
+        confirmButtonText: '确定',
+        confirmButtonClass: 'is-plain el-button--success el-button--medium',
+        cancelButtonText: '取消',
+        cancelButtonClass: 'is-plain el-button--medium',
+        type: 'warning'
+      }).then(() => {
+        this.$message({
+          message: promptConfig.SUCCESSFUL_OPERATION,
+          type: 'success'
+        })
+        row.status = status
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消审核'
+        })
       })
-      row.crewStatus = status
     },
     handleSizeChange(val) {
       this.listQuery.limit = val
@@ -203,6 +219,29 @@ export default {
     handleCurrentChange(val) {
       this.listQuery.page = val
       this.getList()
+    },
+    handleDownload() {
+      this.downloadLoading = true
+      import('@/vendor/Export2Excel').then(excel => {
+        const tHeader = ['name', 'cellphone', 'role.name', 'bank', 'status']
+        const filterVal = ['name', 'cellphone', 'role.name', 'bank', 'status']
+        const data = this.formatJson(filterVal, this.crewList)
+        excel.export_json_to_excel({
+          header: tHeader,
+          data,
+          filename: 'crew-list'
+        })
+        this.downloadLoading = false
+      })
+    },
+    formatJson(filterVal, jsonData) {
+      return jsonData.map(v => filterVal.map(j => {
+        if (j === 'timestamp') {
+          return parseTime(v[j])
+        } else {
+          return v[j]
+        }
+      }))
     },
     handleView(row) {
       this.crewInfo = row
@@ -215,9 +254,6 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss" scoped>
 @import 'src/styles/mixin.scss';
-.select-usergroup {
-  width: 120px;
-}
 .crew-info-container {
   @include clearfix;
   .crew-info-avatar {

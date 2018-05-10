@@ -475,7 +475,7 @@ export default {
       shou: true,
       text: '平台热销产品统计',
       textStyle: {
-        color: '#333',
+        color: '#fff',
         fontWeight: 'bold',
         fontSize: 14,
         height: 40,
@@ -491,6 +491,9 @@ export default {
     }
     this.chartToolBox = {
       show: true,
+      textStyle: {
+        color: '#fff'
+      },
       feature: {
         dataZoom: {
           yAxisIndex: 'none'
@@ -506,7 +509,7 @@ export default {
       shou: true,
       text: '平台热销产品统计',
       textStyle: {
-        color: '#333',
+        color: '#fff',
         fontWeight: 'bold',
         fontSize: 14,
         height: 40,
@@ -530,7 +533,7 @@ export default {
       shou: true,
       text: '机构热销产品统计',
       textStyle: {
-        color: '#333',
+        color: '#fff',
         fontWeight: 'bold',
         fontSize: 14,
         height: 40,
@@ -562,7 +565,7 @@ export default {
       shou: true,
       text: '机构产品申请数量统计趋势',
       textStyle: {
-        color: '#333',
+        color: '#fff',
         fontWeight: 'bold',
         fontSize: 14,
         height: 40,
@@ -584,7 +587,7 @@ export default {
       shou: true,
       text: '机构热销产品统计',
       textStyle: {
-        color: '#333',
+        color: '#fff',
         fontWeight: 'bold',
         fontSize: 14,
         height: 40,
@@ -613,7 +616,7 @@ export default {
       shou: true,
       text: '机构需求对接数量统计趋势',
       textStyle: {
-        color: '#333',
+        color: '#fff',
         fontWeight: 'bold',
         fontSize: 14,
         height: 40,
@@ -673,7 +676,7 @@ export default {
       shou: true,
       text: '在同行中的占比',
       textStyle: {
-        color: '#333',
+        color: '#fff',
         fontWeight: 'bold',
         fontSize: 14,
         height: 40,
@@ -707,7 +710,6 @@ export default {
   margin-bottom: 12px;
   padding: 0 12px;
   width: 100%;
-  background-color: $white;
   border-radius: 6px;
 }
 .meter-bar {
@@ -730,7 +732,7 @@ export default {
           content: "";
           display: block;
           width: 1px;
-          background-color: #ebeef5;
+          // background-color: #ebeef5;
         }
         &:nth-of-type(2)::before,
         &:nth-of-type(4)::before,

@@ -28,7 +28,7 @@ import Layout from '../views/layout/Layout'
   }
 **/
 export const constantRouterMap = [
-  { path: '/signIn', component: _import('signIn/Index'), hidden: true },
+  { path: '/signIn', component: _import('signIn/index'), hidden: true },
   { path: '/404', component: _import('errorPage/404'), hidden: true },
   { path: '/401', component: _import('errorPage/401'), hidden: true },
   {
@@ -37,20 +37,12 @@ export const constantRouterMap = [
     redirect: 'dashboard',
     children: [{
       path: 'dashboard',
-      component: _import('dashboard/Index'),
+      component: _import('dashboard/index'),
       name: 'dashboard',
       meta: { title: 'dashboard', icon: 'icon-dashboard', noCache: true }
     }]
-  }
-]
+  },
 
-export default new Router({
-  // mode: 'history', // require service support
-  scrollBehavior: () => ({ y: 0 }),
-  routes: constantRouterMap
-})
-
-export const asyncRouterMap = [
   {
     path: '/uCenter',
     component: Layout,
@@ -70,16 +62,6 @@ export const asyncRouterMap = [
         meta: {
           title: 'baseInfo',
           icon: 'icon-ucenter',
-          roles: ['admin']
-        }
-      },
-      {
-        path: 'bankInfo',
-        component: _import('uCenter/BankInfo'),
-        name: 'bankInfo',
-        meta: {
-          title: 'bankInfo',
-          icon: 'icon-bank',
           roles: ['admin']
         }
       }
@@ -134,30 +116,59 @@ export const asyncRouterMap = [
   {
     path: '/crew',
     component: Layout,
-    redirect: '/crew/Index',
-    meta: { roles: ['admin'] }, // you can set roles in root nav
-    children: [{
-      path: 'index',
-      component: _import('crew/Index'),
-      name: 'crew',
-      meta: {
-        title: 'crew',
-        icon: 'icon-administrator',
-        roles: ['admin'] // or you can only set roles in sub nav
+    redirect: '/crew/index',
+    meta: {
+      roles: ['admin'],
+      title: 'crew',
+      icon: 'icon-administrator',
+      noCache: true
+    },
+    children: [
+      {
+        path: 'index',
+        component: _import('crew/index'),
+        name: 'crew',
+        meta: {
+          title: 'crew',
+          icon: 'icon-administrator',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'showCrew/:id',
+        hidden: true,
+        component: _import('crew/showCrew'),
+        name: 'showCrew',
+        meta: {
+          title: 'showCrew',
+          icon: 'icon-administrator',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'editCrew/:id',
+        hidden: true,
+        component: _import('crew/editCrew'),
+        name: 'editCrew',
+        meta: {
+          title: 'editCrew',
+          icon: 'icon-administrator',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
       }
-    }]
+    ]
   },
 
   {
     path: '/bankInstitutions',
     component: Layout,
-    redirect: '/bankInstitutions/Index',
+    redirect: '/bankInstitutions/index',
     meta: {
       roles: ['admin']
     },
     children: [{
       path: 'index',
-      component: _import('bankInstitutions/Index'),
+      component: _import('bankInstitutions/index'),
       name: 'bankInstitutions',
       meta: {
         title: 'bank',
@@ -285,13 +296,13 @@ export const asyncRouterMap = [
   {
     path: '/logs',
     component: Layout,
-    redirect: '/logs/Index',
+    redirect: '/logs/index',
     meta: {
       roles: ['admin']
     },
     children: [{
       path: 'index',
-      component: _import('logs/Index'),
+      component: _import('logs/index'),
       name: 'logs',
       meta: {
         title: 'logs',
@@ -304,13 +315,13 @@ export const asyncRouterMap = [
   {
     path: '/report',
     component: Layout,
-    redirect: '/report/Index',
+    redirect: '/report/index',
     meta: {
       roles: ['admin']
     },
     children: [{
       path: 'index',
-      component: _import('report/Index'),
+      component: _import('report/index'),
       name: 'report',
       meta: {
         title: 'report',
@@ -358,13 +369,13 @@ export const asyncRouterMap = [
   {
     path: '/formControl',
     component: Layout,
-    redirect: '/formControl/Index',
+    redirect: '/formControl/index',
     meta: {
       roles: ['admin']
     },
     children: [{
       path: 'index',
-      component: _import('formControl/Index'),
+      component: _import('formControl/index'),
       name: 'formControl',
       meta: {
         title: 'formControl',
@@ -375,4 +386,328 @@ export const asyncRouterMap = [
   },
 
   { path: '*', redirect: '/404', hidden: true }
+
+]
+
+export default new Router({
+  // mode: 'history', // require service support
+  scrollBehavior: () => ({ y: 0 }),
+  routes: constantRouterMap
+})
+
+export const asyncRouterMap = [
+  // {
+  //   path: '/uCenter',
+  //   component: Layout,
+  //   redirect: '/uCenter/BaseInfo',
+  //   meta: {
+  //     roles: ['admin'],
+  //     title: 'uCenter',
+  //     icon: 'icon-ucenter',
+  //     noCache: true
+  //   },
+  //   name: 'uCenter',
+  //   children: [
+  //     {
+  //       path: 'baseInfo',
+  //       component: _import('uCenter/BaseInfo'),
+  //       name: 'baseInfo',
+  //       meta: {
+  //         title: 'baseInfo',
+  //         icon: 'icon-ucenter',
+  //         roles: ['admin']
+  //       }
+  //     }
+  //   ]
+  // },
+
+  // {
+  //   path: '/user',
+  //   component: Layout,
+  //   redirect: '/user/member',
+  //   meta: {
+  //     roles: ['admin'],
+  //     title: 'user',
+  //     icon: 'icon-user',
+  //     noCache: true
+  //   },
+  //   name: 'user',
+  //   children: [
+  //     {
+  //       path: 'member',
+  //       component: _import('user/Member'),
+  //       name: 'member',
+  //       meta: {
+  //         title: 'member',
+  //         icon: 'icon-user',
+  //         roles: ['admin']
+  //       }
+  //     },
+  //     {
+  //       path: 'personal',
+  //       component: _import('user/Personal'),
+  //       name: 'personal',
+  //       meta: {
+  //         title: 'personal',
+  //         icon: 'icon-personal',
+  //         roles: ['admin']
+  //       }
+  //     },
+  //     {
+  //       path: 'company',
+  //       component: _import('user/Company'),
+  //       name: 'company',
+  //       meta: {
+  //         title: 'company',
+  //         icon: 'icon-company',
+  //         roles: ['admin']
+  //       }
+  //     }
+  //   ]
+  // },
+
+  // {
+  //   path: '/crew',
+  //   component: Layout,
+  //   redirect: '/crew/index',
+  //   meta: { roles: ['admin'] }, // you can set roles in root nav
+  //   children: [{
+  //     path: 'index',
+  //     component: _import('crew/index'),
+  //     name: 'crew',
+  //     meta: {
+  //       title: 'crew',
+  //       icon: 'icon-administrator',
+  //       roles: ['admin'] // or you can only set roles in sub nav
+  //     }
+  //   }]
+  // },
+
+  // {
+  //   path: '/bankInstitutions',
+  //   component: Layout,
+  //   redirect: '/bankInstitutions/index',
+  //   meta: {
+  //     roles: ['admin']
+  //   },
+  //   children: [{
+  //     path: 'index',
+  //     component: _import('bankInstitutions/index'),
+  //     name: 'bankInstitutions',
+  //     meta: {
+  //       title: 'bank',
+  //       icon: 'icon-bank',
+  //       roles: ['admin'] // or you can only set roles in sub nav
+  //     }
+  //   }]
+  // },
+
+  // {
+  //   path: '/products',
+  //   component: Layout,
+  //   redirect: '/products/companyProduct',
+  //   meta: {
+  //     roles: ['admin'],
+  //     title: 'products',
+  //     icon: 'icon-product',
+  //     noCache: true
+  //   },
+  //   name: 'products',
+  //   children: [
+  //     {
+  //       path: 'companyProduct',
+  //       component: _import('products/CompanyProduct'),
+  //       name: 'companyProduct',
+  //       meta: {
+  //         title: 'companyProduct',
+  //         icon: 'icon-companyProduct',
+  //         roles: ['admin']
+  //       }
+  //     },
+  //     {
+  //       path: 'personalProduct',
+  //       component: _import('products/PersonalProduct'),
+  //       name: 'personalProduct',
+  //       meta: {
+  //         title: 'personalProduct',
+  //         icon: 'icon-personalProduct',
+  //         roles: ['admin']
+  //       }
+  //     }
+  //   ]
+  // },
+
+  // {
+  //   path: '/application',
+  //   component: Layout,
+  //   redirect: '/application/CompanyProductApply',
+  //   meta: {
+  //     roles: ['admin'],
+  //     title: 'application',
+  //     icon: 'icon-productApply',
+  //     noCache: true
+  //   },
+  //   name: 'application',
+  //   children: [
+  //     {
+  //       path: 'companyProductApply',
+  //       component: _import('application/CompanyProductApply'),
+  //       name: 'companyProductApply',
+  //       meta: {
+  //         title: 'companyProductApply',
+  //         icon: 'icon-companyProduct',
+  //         roles: ['admin']
+  //       }
+  //     },
+  //     {
+  //       path: 'personalProductApply',
+  //       component: _import('application/PersonalProductApply'),
+  //       name: 'personalProductApply',
+  //       meta: {
+  //         title: 'personalProductApply',
+  //         icon: 'icon-personalProduct',
+  //         roles: ['admin']
+  //       }
+  //     },
+  //     {
+  //       path: 'requirementApply',
+  //       component: _import('application/RequirementApply'),
+  //       name: 'requirementApply',
+  //       meta: {
+  //         title: 'requirementApply',
+  //         icon: 'icon-productApply',
+  //         roles: ['admin']
+  //       }
+  //     }
+  //   ]
+  // },
+
+  // {
+  //   path: '/news',
+  //   component: Layout,
+  //   redirect: '/news/NewsList',
+  //   meta: {
+  //     roles: ['admin'],
+  //     title: 'news',
+  //     icon: 'icon-news-center',
+  //     noCache: true
+  //   },
+  //   name: 'news',
+  //   children: [
+  //     {
+  //       path: 'NewsList',
+  //       component: _import('news/NewsList'),
+  //       name: 'newsList',
+  //       meta: {
+  //         title: 'news',
+  //         icon: 'icon-news',
+  //         roles: ['admin']
+  //       }
+  //     },
+  //     {
+  //       path: 'Banner',
+  //       component: _import('news/Banner'),
+  //       name: 'banner',
+  //       meta: {
+  //         title: 'banner',
+  //         icon: 'icon-banner',
+  //         roles: ['admin']
+  //       }
+  //     }
+  //   ]
+  // },
+
+  // {
+  //   path: '/logs',
+  //   component: Layout,
+  //   redirect: '/logs/index',
+  //   meta: {
+  //     roles: ['admin']
+  //   },
+  //   children: [{
+  //     path: 'index',
+  //     component: _import('logs/index'),
+  //     name: 'logs',
+  //     meta: {
+  //       title: 'logs',
+  //       icon: 'icon-logo',
+  //       roles: ['admin'] // or you can only set roles in sub nav
+  //     }
+  //   }]
+  // },
+
+  // {
+  //   path: '/report',
+  //   component: Layout,
+  //   redirect: '/report/index',
+  //   meta: {
+  //     roles: ['admin']
+  //   },
+  //   children: [{
+  //     path: 'index',
+  //     component: _import('report/index'),
+  //     name: 'report',
+  //     meta: {
+  //       title: 'report',
+  //       icon: 'icon-report',
+  //       roles: ['admin'] // or you can only set roles in sub nav
+  //     }
+  //   }]
+  // },
+
+  // {
+  //   path: '/label',
+  //   component: Layout,
+  //   redirect: '/label/SystemLabel',
+  //   meta: {
+  //     roles: ['admin'],
+  //     title: 'label',
+  //     icon: 'icon-product-label-management',
+  //     noCache: true
+  //   },
+  //   name: 'label',
+  //   children: [
+  //     {
+  //       path: 'systemLabel',
+  //       component: _import('label/SystemLabel'),
+  //       name: 'systemLabel',
+  //       meta: {
+  //         title: 'systemLabel',
+  //         icon: 'icon-systemLable',
+  //         roles: ['admin']
+  //       }
+  //     },
+  //     {
+  //       path: 'userLable',
+  //       component: _import('label/UserLable'),
+  //       name: 'userLable',
+  //       meta: {
+  //         title: 'userLable',
+  //         icon: 'icon-product-label-management',
+  //         roles: ['admin']
+  //       }
+  //     }
+  //   ]
+  // },
+
+  // {
+  //   path: '/formControl',
+  //   component: Layout,
+  //   redirect: '/formControl/index',
+  //   meta: {
+  //     roles: ['admin']
+  //   },
+  //   children: [{
+  //     path: 'index',
+  //     component: _import('formControl/index'),
+  //     name: 'formControl',
+  //     meta: {
+  //       title: 'formControl',
+  //       icon: 'icon-formfill',
+  //       roles: ['admin'] // or you can only set roles in sub nav
+  //     }
+  //   }]
+  // },
+
+  // { path: '*', redirect: '/404', hidden: true }
 ]

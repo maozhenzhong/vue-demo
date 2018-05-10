@@ -26,5 +26,9 @@ export default {
   ER_LOAN_AMOUNT_MIN_FORMAT: '贷款最低额度格式不正确',
   ER_LOAN_AMOUNT_MAX_EMPTY: '请输入贷款贷款最高额度',
   ER_LOAN_AMOUNT_MAX_FORMAT: '贷款最高额度格式不正确',
-  ER_LOAN_AMOUNT_MAX_RANGE: '最高贷款额度大于最小额度'
+  ER_LOAN_AMOUNT_MAX_RANGE: '最高贷款额度大于最小额度',
+  ER_UPLOAD_AVATAR_FORMAT: '上传头像图片只能是 JPG、PNG或者GIF格式',
+  ER_UPLOAD_AVATAR_SIZE: '上传头像图片大小不能超过2MB',
+  ER_UPLOAD_AVATAR_SUCCESS: '头像上传成功',
+  ER_PARAMETER: '参数错误'
 }

@@ -1,12 +1,16 @@
 import request from '@/utils/request'
 
-export function signInByCellPhone(cellPhone, password) {
+export function signInByCellphone(cellphone, password, csessionid, sig, token, scene) {
   const data = {
-    cellPhone,
-    password
+    cellphone,
+    password,
+    csessionid,
+    sig,
+    token,
+    scene
   }
   return request({
-    url: '/login/login',
+    url: '/crews/signIn',
     method: 'POST',
     data
   })
@@ -14,14 +18,21 @@ export function signInByCellPhone(cellPhone, password) {
 
 export function signOut() {
   return request({
-    url: '/login/logOut',
-    method: 'POST'
+    url: '/crews/signOut',
+    method: 'GET'
+  })
+}
+
+export function getSignInHash() {
+  return request({
+    url: '/crews/signIn',
+    method: 'GET'
   })
 }
 
 export function getUserInfo(token) {
   return request({
-    url: '/user/info',
+    url: '/personalCenter',
     method: 'GET',
     params: { token }
   })

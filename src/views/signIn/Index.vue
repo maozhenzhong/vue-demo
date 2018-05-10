@@ -5,7 +5,11 @@
       <div class="system-introduction">
         <h1 class="system-logo">{{$t('signIn.title')}}</h1>
         <div class="system-description">{{$t('signIn.description')}}</div>
-        <div class="index-link">{{$t('signIn.loginIndex')}}<a href="javascript:;" target="_blank"><i class="iconfont icon-link"></i></a></div>
+        <div class="index-link">{{$t('signIn.loginIndex')}}
+          <a href="javascript:;" target="_blank">
+            <i class="iconfont icon-link"></i>
+          </a>
+        </div>
       </div>
 
       <!-- 系统登录表单 -->
@@ -17,22 +21,22 @@
 
         <div class="mobile-signIn-content">
           <!-- 账户 -->
-          <el-form-item prop="cellPhone">
+          <el-form-item prop="cellphone">
             <i class="icon-container iconfont icon-sign-user"></i>
-            <el-input name="cellPhone" ref="cellPhone" type="tel" v-model="signInForm.cellPhone" autoComplete="off" :placeholder="$t('signIn.cellPhonePlaceholder')" />
+            <el-input name="cellphone" ref="cellphone" type="tel" v-model="signInForm.cellphone" autoComplete="off" :placeholder="$t('signIn.cellphonePlaceholder')" />
           </el-form-item>
 
           <!-- 密码 -->
           <el-form-item prop="password">
             <i class="icon-container iconfont icon-sign-pwd"></i>
-            <el-input name="password" ref="password" :type="passwordType" @keyup.enter.native="handleSignIn" v-model="signInForm.password" autoComplete="off" :placeholder="$t('signIn.passwordPlaceholder')" />
+            <el-input name="password" ref="password" :type="passwordType" v-model="signInForm.password" autoComplete="off" :placeholder="$t('signIn.passwordPlaceholder')" />
             <i class="show-pwd iconfont" :class="showIcon" @click="showPwd"></i>
           </el-form-item>
         </div>
 
         <!-- 验证码 -->
         <aliyun-capcha class="ali-verify-cody" appkey='FFFF00000000017761E1' scene='signIn' @callback='onCaptcha'></aliyun-capcha>
-        <el-button class="signIn-btn" type="primary" :loading="loading" @click.native.prevent="handleSignIn">{{$t('signIn.logIn')}}</el-button>
+        <el-button class="signIn-btn" type="success" :loading="loading" @click.native.prevent="handleSignIn" plain>{{$t('signIn.logIn')}}</el-button>
       </el-form>
     </div>
   </div>
@@ -40,6 +44,7 @@
 
 <script>
 import { isvalidSignInUsername, isvalidSignInPassword } from '@/utils/validate'
+import { getSignInHash, signInByCellphone } from '@/api/signIn'
 import AliyunCaptcha from 'vue-aliyun-captcha'
 import errorConfig from '@/errorConfig'
 
@@ -49,9 +54,9 @@ export default {
     'aliyun-capcha': AliyunCaptcha
   },
   data() {
-    const validateCellphone = (rule, value, callback) => {
-      const inputCellphone = this.$refs.cellPhone
-      if (isvalidSignInUsername(inputCellphone, value)) {
+    const validatecellphone = (rule, value, callback) => {
+      const inputcellphone = this.$refs.cellphone
+      if (isvalidSignInUsername(inputcellphone, value)) {
         callback()
       }
     }
@@ -63,12 +68,21 @@ export default {
     }
     return {
       signInForm: {
-        cellPhone: '18800000000',
-        password: 'admin8888'
+        cellphone: '18800000000',
+        password: 'admin8888',
+        csessionid: '',
+        sig: '',
+        token: '',
+        scene: ''
       },
+      signInHash: '',
       signInRules: {
-        cellPhone: [{ required: true, trigger: 'blur', validator: validateCellphone }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+        cellphone: [
+          { required: true, trigger: 'blur', validator: validatecellphone }
+        ],
+        password: [
+          { required: true, trigger: 'blur', validator: validatePassword }
+        ]
       },
       passwordType: 'password',
       loading: false,
@@ -76,12 +90,21 @@ export default {
       showIcon: 'icon-hide-pwd'
     }
   },
+  created() {
+    this.getHash()
+  },
   methods: {
+    getHash() {
+      getSignInHash().then(response => {
+        this.signInHash = response.data.data[0]
+        this.signInForm.password = this.signInHash
+      })
+    },
     onCaptcha(data) {
-      this.csessionid = data.csessionid
-      this.sig = data.sig
-      this.token = data.token
-      this.scene = data.scene
+      this.signInForm.csessionid = data.csessionid
+      this.signInForm.sig = data.sig
+      this.signInForm.token = data.token
+      this.signInForm.scene = data.scene
       this.nc = data.nc
     },
     showPwd() {
@@ -95,26 +118,34 @@ export default {
     },
     handleSignIn() {
       this.$refs.signInForm.validate(valid => {
-        if (valid) {
-          if (this.nc) {
-            this.loading = true
-            this.$store.dispatch('SignInByCellPhone', this.signInForm).then(() => {
-              this.loading = false
-              this.$router.push({ path: '/' })
-            }).catch(() => {
-              this.loading = false
-            })
-            this.nc.reset()
+        if (!valid) {
+          return false
+        }
+
+        if (!this.nc) {
+          this.$message({
+            message: errorConfig.ER_SLIDING_CAPTCHA,
+            type: 'error'
+          })
+          return false
+        }
+
+        this.loading = true
+        signInByCellphone(this.signInForm).then(response => {
+          const responseData = response.data
+          if (responseData.status === 1) {
+            this.loading = false
+            this.$router.push({ path: '/' })
           } else {
             this.$message({
-              message: errorConfig.ER_SLIDING_CAPTCHA,
+              message: responseData.data.title,
               type: 'error'
             })
             return false
           }
-        } else {
-          return false
-        }
+        }).catch(() => {
+          this.loading = false
+        })
       })
     }
   }

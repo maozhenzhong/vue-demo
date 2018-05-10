@@ -41,6 +41,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { signOut } from '@/api/signIn'
 import Hamburger from '@/components/Hamburger'
 import Screenfull from '@/components/Screenfull'
 import Refresh from '@/components/Refresh'
@@ -66,9 +67,15 @@ export default {
       this.$store.dispatch('toggleSideBar')
     },
     signOut() {
-      this.$store.dispatch('SignOut').then(() => {
-        location.reload()// In order to re-instantiate the vue-router object to avoid bugs
+      signOut().then(response => {
+        const responseData = response.data
+        if (responseData.status === 1) {
+          this.$router.push({ path: '/signIn' })
+        }
       })
+      // this.$store.dispatch('SignOut').then(() => {
+      //   location.reload()// In order to re-instantiate the vue-router object to avoid bugs
+      // })
     }
   }
 }

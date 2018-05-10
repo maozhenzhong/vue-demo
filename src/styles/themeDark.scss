@@ -1,6 +1,19 @@
 .dark {
   background-color: $theme-dark-body-bg;
 
+  .headerBar {
+    .hamburger-container {
+      border-right: 1px solid #ebeef5;
+      border-left: 1px solid #ebeef5;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .logo {
+      background-image: url('../assets/img/logo_light.png') !important;
+    }
+  }
+
   a,
   .el-tabs__item.is-active,
   .el-tabs__item:hover {
@@ -14,7 +27,7 @@
   .scroll-container {
     background-color: $theme-dark-sidebar-bg;
   }
-  
+
   .el-menu-item,
   .el-menu-item .iconfont,
   .el-submenu__title .iconfont,
@@ -51,12 +64,12 @@
   }
 
   .el-submenu {
-
     .el-menu {
       background-color: $theme-dark-sidebar-group-active !important;
     }
 
-    .el-menu-item:focus, .el-menu-item:hover {
+    .el-menu-item:focus,
+    .el-menu-item:hover {
       background-color: $theme-dark-sidebar-item-active;
     }
   }
@@ -96,21 +109,17 @@
   }
 
   .panel {
-
     .panel-heading {
       border-color: $theme-dark-border-300 !important;
 
       .panel-title {
-
         &::before {
-          background-color: $theme-dark-base
+          background-color: $theme-dark-base;
         }
       }
 
       .right-menu {
-
         .navbar {
-
           li {
             &.active {
               a {
@@ -130,12 +139,11 @@
     border-color: $theme-dark-border-300 !important;
 
     &::before {
-      background-color: $theme-dark-base
+      background-color: $theme-dark-base;
     }
   }
 
   .reference-info {
-
     .tabs-item {
       border: 1px solid $theme-dark-border-300 !important;
 
@@ -146,14 +154,12 @@
     }
   }
   .userinfo-side {
-
     .avatar-info {
       background-color: $theme-dark-body-bg;
     }
 
     .easy-navigation {
       .navbar {
-
         li {
           a.router-link-active {
             color: $theme-dark-base;
@@ -177,6 +183,35 @@
       }
     }
   }
+  .signIn-container {
+    background-image: url('../assets/img/login_pc_bg.jpg');
+  }
+
+  @media (min-width: 768px) {
+    .login-container {
+      background-image: url('../assets/img/login_pad_bg.jpg');
+    }
+  }
+
+  @media (min-width: 1176px) {
+    .signIn-container {
+      background-image: url('../assets/img/login_pc_bg.jpg');
+    }
+  }
+
+  .meter-bar {
+    .el-row {
+      .el-col {
+        &::before {
+          background-color: #ebeef5;
+        }
+      }
+    }
+  }
+
+  .copy {
+    background-color: $theme-dark-sidebar-bg;
+  }
 }
 
 .dark ~ .el-dropdown-menu {
@@ -185,4 +220,4 @@
       color: $theme-dark-base !important;
     }
   }
-} 
+}

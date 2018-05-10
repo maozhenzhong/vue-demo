@@ -1,5 +1,5 @@
 <template>
-  <section class="copy-bar">&copy; 2018 北京企信云提供技术支持</section class="copy-bar">
+  <section class="copy-bar">&copy; 2018 北京企信云提供技术支持</section>
 </template>
 
 <script>

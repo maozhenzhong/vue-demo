@@ -5,9 +5,9 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import adminDashboard from './admin/Index'
-import editorDashboard from './editor/Index'
+// import { mapGetters } from 'vuex'
+import adminDashboard from './admin/index'
+import editorDashboard from './editor/index'
 
 export default {
   name: 'dashboard',
@@ -18,14 +18,15 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'roles'
-    ])
+    // ...mapGetters([
+    //   'roles'
+    // ])
   },
   created() {
-    if (!this.roles.includes('admin')) {
-      this.currentRole = 'editorDashboard'
-    }
+    // console.log(this.roles)
+    // if (!this.roles.includes('admin')) {
+    //   this.currentRole = 'editorDashboard'
+    // }
   }
 }
 </script>

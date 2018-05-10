@@ -2,49 +2,49 @@
   <div class="container-fluid">
     <el-row :gutter="10">
       <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
-        <el-form :model="ruleForm" :rules="rules" status-icon ref="ruleForm" label-width="100px" class="demo-ruleForm">
+        <el-form :model="ruleForm" :rules="rules" status-icon ref="ruleForm" class="demo-ruleForm">
           <!-- <el-form-item label="头像">
             <div class="change-avatar">
               <img id="zoom" :src="imgDataUrl">
-              <el-button type="primary" size="medium" @click="toggleShow">{{$t('userInfo.setAvatar')}}
+              <el-button type="primary" size="medium" @click="toggleShow">{{$t('form.setAvatar')}}
                 <i class="el-icon-upload el-icon--right"></i>
               </el-button>
               <avatar-upload field="img" @crop-success="cropSuccess" @crop-upload-success="cropUploadSuccess" @crop-upload-fail="cropUploadFail" v-model="show" :width="128" :height="128" url="/upload" :params="params" :headers="headers" img-format="png"></avatar-upload>
             </div>
           </el-form-item> -->
-          <el-form-item prop="cellPhone" :label="$t('userInfo.cellPhone')">
-            <el-input name="cellPhone" type="tel" ref="cellPhone" v-model="ruleForm.cellPhone" maxlength="11" autoComplete="off" :placeholder="$t('userInfo.cellPhonePlaceholder')"></el-input>
+          <el-form-item prop="cellPhone">
+            <el-input name="cellPhone" type="tel" ref="cellPhone" v-model="ruleForm.cellPhone" maxlength="11" autoComplete="off" :placeholder="$t('form.cellphone')"></el-input>
           </el-form-item>
-          <el-form-item prop="crewStaff" :label="$t('userInfo.crewStaff')">
-            <el-input name="crewStaff" ref="crewStaff" v-model="ruleForm.crewStaff" minlength="2" maxlength="10" autoComplete="off" :placeholder="$t('userInfo.crewStaffPlaceholder')"></el-input>
+          <el-form-item prop="crewStaff">
+            <el-input name="crewStaff" ref="crewStaff" v-model="ruleForm.crewStaff" minlength="2" maxlength="10" autoComplete="off" :placeholder="$t('form.staff')"></el-input>
           </el-form-item>
-          <el-form-item prop="crewRealname" :label="$t('userInfo.crewRealname')">
-            <el-input name="crewRealname" ref="crewRealname" v-model="ruleForm.crewRealname" minlength="2" maxlength="10" autoComplete="off" :placeholder="$t('userInfo.crewRealnamePlaceholder')"></el-input>
+          <el-form-item prop="crewRealname">
+            <el-input name="crewRealname" ref="crewRealname" v-model="ruleForm.crewRealname" minlength="2" maxlength="10" autoComplete="off" :placeholder="$t('form.name')"></el-input>
           </el-form-item>
-          <el-form-item prop="oldPassword" :label="$t('changePassword.oldPassword')">
-            <el-input name="oldPassword" type="password" ref="oldPassword" v-model="ruleForm.oldPassword" minlength="6" maxlength="30" autoComplete="off" :placeholder="$t('changePassword.oldPasswordPlaceholder')"></el-input>
+          <el-form-item prop="oldPassword">
+            <el-input name="oldPassword" type="password" ref="oldPassword" v-model="ruleForm.oldPassword" minlength="6" maxlength="30" autoComplete="off" :placeholder="$t('form.oldPassword')"></el-input>
           </el-form-item>
-          <el-form-item prop="password" :label="$t('changePassword.password')">
-            <el-input name="password" type="password" ref="password" v-model="ruleForm.password" minlength="6" maxlength="30" autoComplete="off" :placeholder="$t('changePassword.passwordPlaceholder')"></el-input>
+          <el-form-item prop="password">
+            <el-input name="password" type="password" ref="password" v-model="ruleForm.password" minlength="6" maxlength="30" autoComplete="off" :placeholder="$t('form.password')"></el-input>
           </el-form-item>
-          <el-form-item prop="rePassword" :label="$t('changePassword.rePassword')">
-            <el-input name="rePassword" type="password" ref="rePassword" v-model="ruleForm.rePassword" minlength="6" maxlength="30" autoComplete="off" :placeholder="$t('changePassword.rePasswordPlaceholder')"></el-input>
+          <el-form-item prop="rePassword">
+            <el-input name="rePassword" type="password" ref="rePassword" v-model="ruleForm.rePassword" minlength="6" maxlength="30" autoComplete="off" :placeholder="$t('form.rePassword')"></el-input>
           </el-form-item>
-          <el-form-item prop="smsCellPhone" :label="$t('changePassword.smsCellPhone')">
-            <el-input name="smsCellPhone" ref="smsCellPhone" v-model="ruleForm.smsCellPhone" maxlength="11" autoComplete="off" :placeholder="$t('userInfo.cellPhonePlaceholder')"></el-input>
+          <el-form-item prop="smsCellPhone">
+            <el-input name="smsCellPhone" ref="smsCellPhone" v-model="ruleForm.smsCellPhone" maxlength="11" autoComplete="off" :placeholder="$t('form.cellphone')"></el-input>
           </el-form-item>
-          <el-form-item class="input-group" prop="verifcationCode" :label="$t('changePassword.verifcationCode')">
-            <el-input name="verifcationCode" type="tel" v-model="ruleForm.verifcationCode" ref="verifcationCode" maxlength="4" autoComplete="off" :placeholder="$t('changePassword.verifcationCodePlaceholder')">
+          <el-form-item class="input-group" prop="verifcationCode">
+            <el-input name="verifcationCode" type="tel" v-model="ruleForm.verifcationCode" ref="verifcationCode" maxlength="4" autoComplete="off" :placeholder="$t('form.verificationCode')">
             </el-input>
             <div class="input-group-btn">
-              <el-button class="send-message" type="primary" @click.native.prevent="sendMsg" :disabled="this.sendMsgDisabled">
-                <span v-if="!sendMsgDisabled">{{$t('changePassword.sendMessages')}}</span>
+              <el-button class="send-message" type="success" @click.native.prevent="sendMsg" :disabled="this.sendMsgDisabled" plain>
+                <span v-if="!sendMsgDisabled">{{$t('form.sendMessages')}}</span>
                 <span v-if="sendMsgDisabled">{{rTime + 'S'}}</span>
               </el-button>
             </div>
           </el-form-item>
-          <el-form-item prop="usergroup" :label="$t('form.usergroup')">
-            <el-select name="usergroup" ref="usergroup" v-model="ruleForm.usergroup" :placeholder="$t('form.usergroupPlaseholder')">
+          <el-form-item prop="usergroup">
+            <el-select name="usergroup" ref="usergroup" v-model="ruleForm.usergroup" :placeholder="$t('form.bank')">
               <el-option value="BOC" label="中国银行"></el-option>
               <el-option value="CMB" label="招商银行"></el-option>
               <el-option value="CCB" label="中国建设银行"></el-option>
@@ -54,39 +54,43 @@
               <el-option value="CIB" label="兴业银行"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item :label="$t('form.role')" prop="role">
+          <el-form-item prop="role">
             <el-radio-group v-model="ruleForm.role">
               <el-radio :label="0">系统管理员</el-radio>
               <el-radio :label="1">银行管理人员</el-radio>
               <el-radio :label="2">银行工作人员</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item prop="question" :label="$t('question.question')">
-            <el-input name="question" ref="question" v-model="ruleForm.question" autoComplete="off" :placeholder="$t('question.questionPlaceholder')"></el-input>
+          <el-form-item prop="question">
+            <el-input name="question" ref="question" v-model="ruleForm.question" autoComplete="off" :placeholder="$t('form.question')"></el-input>
           </el-form-item>
-          <el-form-item prop="answer" :label="$t('question.answer')">
-            <el-input name="answer" type="textarea" ref="answer" v-model="ruleForm.answer" autoComplete="off" :placeholder="$t('question.answerPlaceholder')"></el-input>
+          <el-form-item prop="answer">
+            <el-input name="answer" type="textarea" ref="answer" v-model="ruleForm.answer" autoComplete="off" :placeholder="$t('form.answer')"></el-input>
           </el-form-item>
-          <el-form-item prop="updateTime" :label="$t('form.updateTime')">
-            <el-date-picker type="date" ref="updateTime" v-model="ruleForm.updateTime" :placeholder="$t('form.updateTimePlaceholder')">
+          <el-form-item prop="updateTime">
+            <el-date-picker type="date" ref="updateTime" v-model="ruleForm.updateTime" :placeholder="$t('form.updateTime')">
             </el-date-picker>
           </el-form-item>
-          <el-form-item :label="$t('products.loanAmount')" required>
-            <el-col :span="11">
+          <el-form-item prop="loanAmount" required>
+            <el-col :span="11" style="padding-left: 0; padding-right: 0;">
               <el-form-item prop="loanAmountMin">
-                <el-input name="loanAmountMin" type="number" ref="loanAmountMin" v-model="ruleForm.loanAmountMin" autoComplete="off" :placeholder="$t('products.loanAmountMinPlaceholder')"></el-input>
+                <el-input name="loanAmountMin" type="number" ref="loanAmountMin" v-model="ruleForm.loanAmountMin" autoComplete="off" :placeholder="$t('form.loanAmountMin')"></el-input>
               </el-form-item>
             </el-col>
-            <el-col class="line" :span="2" style="text-align: center;">-</el-col>
-            <el-col :span="11">
+            <el-col class="line" :span="2" style="text-align: center; padding-left: 0; padding-right: 0;">-</el-col>
+            <el-col :span="11" style="padding-left: 0; padding-right: 0;">
               <el-form-item prop="loanAmountMax">
-                <el-input name="loanAmountMax" type="number" ref="loanAmountMax" v-model="ruleForm.loanAmountMax" autoComplete="off" :placeholder="$t('products.loanAmountMaxPlaceholder')"></el-input>
+                <el-input name="loanAmountMax" type="number" ref="loanAmountMax" v-model="ruleForm.loanAmountMax" autoComplete="off" :placeholder="$t('form.loanAmountMax')"></el-input>
               </el-form-item>
             </el-col>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
-            <el-button @click="resetForm('ruleForm')">重置</el-button>
+            <el-col :span="12" style="padding-left: 0; padding-right: 6px;">
+              <el-button class="el-button-block" type="success" @click="submitForm('ruleForm')" plain>立即创建</el-button>
+            </el-col>
+            <el-col :span="12" style="padding-left: 6px; padding-right: 0;">
+              <el-button class="el-button-block" @click="resetForm('ruleForm')" plain>重置</el-button>
+            </el-col>
           </el-form-item>
         </el-form>
       </el-col>
