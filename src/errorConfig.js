@@ -30,5 +30,6 @@ export default {
   ER_UPLOAD_AVATAR_FORMAT: '上传头像图片只能是 JPG、PNG或者GIF格式',
   ER_UPLOAD_AVATAR_SIZE: '上传头像图片大小不能超过2MB',
   ER_UPLOAD_AVATAR_SUCCESS: '头像上传成功',
-  ER_PARAMETER: '参数错误'
+  ER_PARAMETER: '参数错误',
+  ER_RESPONSE: '暂无数据'
 }

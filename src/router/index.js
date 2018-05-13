@@ -48,12 +48,10 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/uCenter/BaseInfo',
     meta: {
-      roles: ['admin'],
       title: 'uCenter',
       icon: 'icon-ucenter',
       noCache: true
     },
-    name: 'uCenter',
     children: [
       {
         path: 'baseInfo',
@@ -69,21 +67,19 @@ export const constantRouterMap = [
   },
 
   {
-    path: '/user',
+    path: '/member',
     component: Layout,
-    redirect: '/user/member',
+    redirect: '/member/Member/index',
     meta: {
-      roles: ['admin'],
-      title: 'user',
+      title: 'member',
       icon: 'icon-user',
       noCache: true
     },
-    name: 'user',
     children: [
       {
-        path: 'member',
-        component: _import('user/Member'),
-        name: 'member',
+        path: 'Member',
+        component: _import('member/Member/index'),
+        name: 'Member',
         meta: {
           title: 'member',
           icon: 'icon-user',
@@ -91,22 +87,12 @@ export const constantRouterMap = [
         }
       },
       {
-        path: 'personal',
-        component: _import('user/Personal'),
-        name: 'personal',
+        path: 'Approve',
+        component: _import('member/Approve/index'),
+        name: 'approve',
         meta: {
-          title: 'personal',
-          icon: 'icon-personal',
-          roles: ['admin']
-        }
-      },
-      {
-        path: 'company',
-        component: _import('user/Company'),
-        name: 'company',
-        meta: {
-          title: 'company',
-          icon: 'icon-company',
+          title: 'approve',
+          icon: 'icon-approve',
           roles: ['admin']
         }
       }
@@ -118,7 +104,6 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/crew/index',
     meta: {
-      roles: ['admin'],
       title: 'crew',
       icon: 'icon-administrator',
       noCache: true
@@ -160,22 +145,93 @@ export const constantRouterMap = [
   },
 
   {
-    path: '/bankInstitutions',
+    path: '/bank',
     component: Layout,
-    redirect: '/bankInstitutions/index',
+    redirect: '/bank/index',
     meta: {
-      roles: ['admin']
+      title: 'bank',
+      icon: 'icon-bank',
+      noCache: true
     },
-    children: [{
-      path: 'index',
-      component: _import('bankInstitutions/index'),
-      name: 'bankInstitutions',
-      meta: {
-        title: 'bank',
-        icon: 'icon-bank',
-        roles: ['admin'] // or you can only set roles in sub nav
+    children: [
+      {
+        path: 'index',
+        component: _import('bank/index'),
+        name: 'bank',
+        meta: {
+          title: 'bank',
+          icon: 'icon-bank',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'editBank/:id',
+        hidden: true,
+        component: _import('bank/editBank'),
+        name: 'editBank',
+        meta: {
+          title: 'editBank',
+          icon: 'icon-bank',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'showBank/:id',
+        hidden: true,
+        component: _import('bank/showBank'),
+        name: 'showBank',
+        meta: {
+          title: 'showBank',
+          icon: 'icon-bank',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
       }
-    }]
+    ]
+  },
+
+  {
+    path: '/branches',
+    component: Layout,
+    redirect: '/branches/index',
+    meta: {
+      title: 'branches',
+      icon: 'icon-branches',
+      noCache: true
+    },
+    children: [
+      {
+        path: 'index',
+        component: _import('branches/index'),
+        name: 'branches',
+        meta: {
+          title: 'branches',
+          icon: 'icon-branches',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'editBranches/:id',
+        hidden: true,
+        component: _import('branches/editBranches'),
+        name: 'editBranches',
+        meta: {
+          title: 'editBranches',
+          icon: 'icon-branches',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'showBranches/:id',
+        hidden: true,
+        component: _import('branches/showBranches'),
+        name: 'showBranches',
+        meta: {
+          title: 'showBranches',
+          icon: 'icon-branches',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      }
+    ]
   },
 
   {
@@ -183,12 +239,10 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/products/companyProduct',
     meta: {
-      roles: ['admin'],
       title: 'products',
       icon: 'icon-product',
       noCache: true
     },
-    name: 'products',
     children: [
       {
         path: 'companyProduct',
@@ -218,12 +272,10 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/application/CompanyProductApply',
     meta: {
-      roles: ['admin'],
       title: 'application',
       icon: 'icon-productApply',
       noCache: true
     },
-    name: 'application',
     children: [
       {
         path: 'companyProductApply',
@@ -263,12 +315,10 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/news/NewsList',
     meta: {
-      roles: ['admin'],
       title: 'news',
       icon: 'icon-news-center',
       noCache: true
     },
-    name: 'news',
     children: [
       {
         path: 'NewsList',
@@ -336,12 +386,10 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/label/SystemLabel',
     meta: {
-      roles: ['admin'],
       title: 'label',
       icon: 'icon-product-label-management',
       noCache: true
     },
-    name: 'label',
     children: [
       {
         path: 'systemLabel',
@@ -401,9 +449,9 @@ export const asyncRouterMap = [
   //   component: Layout,
   //   redirect: '/uCenter/BaseInfo',
   //   meta: {
-  //     roles: ['admin'],
   //     title: 'uCenter',
   //     icon: 'icon-ucenter',
+  //     roles: ['admin'],
   //     noCache: true
   //   },
   //   name: 'uCenter',

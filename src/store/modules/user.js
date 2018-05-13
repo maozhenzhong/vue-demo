@@ -43,11 +43,9 @@ const user = {
   actions: {
     GetUserInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
-        getUserInfo(state.token).then(response => {
-          if (!response.data) {
-            reject('error')
-          }
-          const data = response.data
+        getUserInfo().then(response => {
+          const responseData = response.data
+          const data = responseData.data
           commit('SET_ROLES', data.roles)
           commit('SET_NAME', data.name)
           commit('SET_AVATAR', data.avatar)

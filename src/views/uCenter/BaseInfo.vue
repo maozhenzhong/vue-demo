@@ -12,7 +12,7 @@
               :on-error="handleError"
               :before-upload="beforeUpload"
               :data='postData'>
-              <img v-if="userInfoForm.avatarUrl" :src="userInfoForm.avatarUrl" width="128" height="128" class="avatar">
+              <img v-if="userInfoForm.avatar" :src="userInfoForm.avatar" width="128" height="128" class="avatar">
               <!-- <img v-else :src="uploadAvatar"> -->
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
@@ -20,14 +20,14 @@
           <el-form-item prop="cellphone">
             <el-input name="cellphone" ref="cellphone" v-model="userInfoForm.cellphone" autoComplete="off" :placeholder="$t('form.cellphone')"></el-input>
           </el-form-item>
-          <el-form-item prop="crewStaff">
-            <el-input name="crewStaff" ref="crewStaff" v-model="userInfoForm.crewStaff" autoComplete="off" :placeholder="$t('form.staff')"></el-input>
+          <el-form-item prop="staff">
+            <el-input name="staff" ref="staff" v-model="userInfoForm.staff" autoComplete="off" :placeholder="$t('form.staff')"></el-input>
           </el-form-item>
-          <el-form-item prop="crewUserGroup">
-            <el-input name="crewUserGroup" ref="crewUserGroup" v-model="userInfoForm.crewUserGroup" autoComplete="off" :placeholder="$t('form.bank')" :disabled="true"></el-input>
+          <el-form-item prop="bank">
+            <el-input name="bank" ref="bank" v-model="userInfoForm.bank.name" autoComplete="off" :placeholder="$t('form.bank')" :disabled="true"></el-input>
           </el-form-item>
-          <el-form-item prop="crewRealname">
-            <el-input name="crewRealname" ref="crewRealname" v-model="userInfoForm.crewRealname" autoComplete="off" :placeholder="$t('form.name')"></el-input>
+          <el-form-item prop="name">
+            <el-input name="name" ref="name" v-model="userInfoForm.name" autoComplete="off" :placeholder="$t('form.name')"></el-input>
           </el-form-item>
            <el-form-item>
             <el-col :span="24" style="padding-left: 0; padding-right: 0;">
@@ -57,12 +57,12 @@
     </el-tabs>
 
     <el-dialog :title="$t('changePassword.authentication')" :visible.sync="dialogFormVerify">
-      <el-form :model="smsVerifyForm" status-icon :rules="smsVerifyRules" ref="smsVerifyForm" :label-width="formLabelWidth">
-        <el-form-item prop="smsCellphone" :label="$t('changePassword.smsCellphone')">
-          <el-input name="smsCellphone" ref="smsCellphone" v-model="smsVerifyForm.smsCellphone" autoComplete="off" :placeholder="$t('userInfo.cellphonePlaceholder')"></el-input>
+      <el-form :model="smsVerifyForm" status-icon :rules="smsVerifyRules" ref="smsVerifyForm">
+        <el-form-item prop="smsCellphone">
+          <el-input name="smsCellphone" ref="smsCellphone" v-model="smsVerifyForm.smsCellphone" autoComplete="off" :placeholder="$t('changePassword.smsCellphone')"></el-input>
         </el-form-item>
-        <el-form-item class="input-group" prop="verifcationCode" :label="$t('changePassword.verifcationCode')">
-          <el-input name="verifcationCode" type="tel" v-model="smsVerifyForm.verifcationCode" ref="verifcationCode" autoComplete="off" :placeholder="$t('changePassword.verifcationCodePlaceholder')">
+        <el-form-item class="input-group" prop="verifcationCode">
+          <el-input name="verifcationCode" type="tel" v-model="smsVerifyForm.verifcationCode" ref="verifcationCode" autoComplete="off" :placeholder="$t('changePassword.verifcationCode')">
           </el-input>
           <div class="input-group-btn">
             <el-button class="send-message" type="primary" @click.native.prevent="sendMsg" :disabled="this.sendMsgDisabled">
@@ -84,7 +84,7 @@ import {
   updateUserInfo,
   getUserInfo,
   sendSmsVerifcationCode,
-  changePassword
+  updatePassword
 } from '@/api/baseInfo'
 import {
   isvalidCellphone,
@@ -163,10 +163,14 @@ export default {
       // uploadAvatar,
       show: false,
       userInfoForm: {
-        avatarUrl: null,
+        avatar: null,
         cellphone: null,
-        crewStaff: null,
-        crewUserGroup: null,
+        name: null,
+        staff: null,
+        bank: {
+          id: null,
+          name: null
+        },
         crewRealname: null
       },
       changePasswordForm: {
@@ -224,22 +228,26 @@ export default {
   methods: {
     getInfo() {
       getUserInfo().then(response => {
-        this.userInfoForm = response.data
-        this.smsVerifyForm.smsCellphone = response.data.cellphone
+        const responseData = response.data
+        this.userInfoForm = responseData.data
+        console.log(this.userInfoForm)
+        this.smsVerifyForm.smsCellphone = responseData.data.cellphone
       })
     },
     updateInfoSubmit() {
       this.$refs['userInfoForm'].validate(valid => {
         if (valid) {
           const userInfoData = Object.assign({}, this.userInfoForm)
-          console.log(userInfoData)
-          updateUserInfo(userInfoData).then(() => {
+          const id = this.userInfoForm.id
+          updateUserInfo(userInfoData, id).then(() => {
             this.$notify({
               title: promptConfig.UPDATE_SUCCESS_TITLE,
               message: promptConfig.UPDATE_SUCCESS_MESSAGE,
               type: 'success',
               duration: 2000
             })
+          }).then(response => {
+            console.log(response)
           })
         }
       })
@@ -284,7 +292,8 @@ export default {
       this.$refs['changePasswordForm'].validate(valid => {
         if (valid) {
           const passwordData = Object.assign({}, this.changePasswordForm)
-          changePassword(passwordData).then(() => {
+          const id = this.userInfoForm.id
+          updatePassword(passwordData, id).then(() => {
             this.$notify({
               title: promptConfig.UPDATE_SUCCESS_TITLE,
               message: promptConfig.UPDATE_SUCCESS_MESSAGE,

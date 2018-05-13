@@ -235,12 +235,12 @@ a:hover {
     text-align: right;
     white-space: nowrap;
     text-overflow: ellipsis;
-    line-height: 1.42857143;
+    line-height: 28px;
     color: $gray-200;
   }
   dd {
     margin-left: 0;
-    line-height: 1.42857143;
+    line-height: 28px;
 
     @include clearfix;
   }
@@ -442,6 +442,8 @@ a:hover {
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  width: 128px;
+  height: 128px;
 }
 
 .avatar-uploader .avatar-uploader-icon {
@@ -453,7 +455,7 @@ a:hover {
   text-align: center;
 }
 
-.crew-info {
+.show-content {
   position: relative;
   padding: 12px 0;
 

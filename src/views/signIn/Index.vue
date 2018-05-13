@@ -23,13 +23,13 @@
           <!-- 账户 -->
           <el-form-item prop="cellphone">
             <i class="icon-container iconfont icon-sign-user"></i>
-            <el-input name="cellphone" ref="cellphone" type="tel" v-model="signInForm.cellphone" autoComplete="off" :placeholder="$t('signIn.cellphonePlaceholder')" />
+            <el-input name="cellphone" ref="cellphone" type="tel" v-model="signInForm.cellphone" autoComplete="off" :placeholder="$t('signIn.cellphone')" />
           </el-form-item>
 
-          <!-- 密码 -->
+          <!-- 密码 v-model="signInForm.password"  -->
           <el-form-item prop="password">
             <i class="icon-container iconfont icon-sign-pwd"></i>
-            <el-input name="password" ref="password" :type="passwordType" v-model="signInForm.password" autoComplete="off" :placeholder="$t('signIn.passwordPlaceholder')" />
+            <el-input name="password" ref="password" :type="passwordType" autoComplete="off" @blur="encryptPassword" :placeholder="$t('signIn.password')" />
             <i class="show-pwd iconfont" :class="showIcon" @click="showPwd"></i>
           </el-form-item>
         </div>
@@ -47,6 +47,8 @@ import { isvalidSignInUsername, isvalidSignInPassword } from '@/utils/validate'
 import { getSignInHash, signInByCellphone } from '@/api/signIn'
 import AliyunCaptcha from 'vue-aliyun-captcha'
 import errorConfig from '@/errorConfig'
+import CryptoJS from 'crypto-js'
+import CryptoJSAesJson from '@/utils/aesJsonFormat'
 
 export default {
   name: 'signIn',
@@ -68,14 +70,13 @@ export default {
     }
     return {
       signInForm: {
-        cellphone: '18800000000',
-        password: 'admin8888',
+        cellphone: '',
+        password: '',
         csessionid: '',
         sig: '',
         token: '',
         scene: ''
       },
-      signInHash: '',
       signInRules: {
         cellphone: [
           { required: true, trigger: 'blur', validator: validatecellphone }
@@ -90,14 +91,12 @@ export default {
       showIcon: 'icon-hide-pwd'
     }
   },
-  created() {
-    this.getHash()
-  },
   methods: {
-    getHash() {
+    encryptPassword() {
       getSignInHash().then(response => {
-        this.signInHash = response.data.data[0]
-        this.signInForm.password = this.signInHash
+        const hash = response.data.data[0]
+        const password = this.$refs.password.currentValue
+        this.signInForm.password = CryptoJS.AES.encrypt(JSON.stringify(password), hash, { format: CryptoJSAesJson }).toString()
       })
     },
     onCaptcha(data) {
@@ -129,13 +128,17 @@ export default {
           })
           return false
         }
-
         this.loading = true
         signInByCellphone(this.signInForm).then(response => {
           const responseData = response.data
           if (responseData.status === 1) {
-            this.loading = false
-            this.$router.push({ path: '/' })
+            this.loading = true
+            this.$store.dispatch('GetUserInfo', this.loginForm).then(() => {
+              this.loading = false
+              this.$router.push({ path: '/' })
+            }).catch(() => {
+              this.loading = false
+            })
           } else {
             this.$message({
               message: responseData.data.title,

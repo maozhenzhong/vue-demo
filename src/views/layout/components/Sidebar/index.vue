@@ -1,7 +1,7 @@
 <template>
   <scroll-bar>
     <el-menu mode="vertical" :default-active="$route.path" :collapse="isCollapse">
-      <sidebar-item :routes="permission_routers"></sidebar-item>
+      <sidebar-item :routes="routes"></sidebar-item>
     </el-menu>
     <div class="copy"><a href="https://www.qixinyun.com/index.html" target="_blank">{{$t('route.copy')}}</a></div>
   </scroll-bar>
@@ -16,9 +16,12 @@ export default {
   components: { SidebarItem, ScrollBar },
   computed: {
     ...mapGetters([
-      'permission_routers',
+      // 'permission_routers',
       'sidebar'
     ]),
+    routes() {
+      return this.$router.options.routes
+    },
     isCollapse() {
       return !this.sidebar.opened
     }

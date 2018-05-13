@@ -1,5 +1,7 @@
 <template>
-  <div class="app-wrapper" :class="{hideSidebar:!sidebar.opened}">
+  <!-- <div class="app-wrapper" :class="{hideSidebar:!sidebar.opened}"> -->
+  <div class="app-wrapper" :class="classObj">
+    <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside"></div>
     <header-bar></header-bar>
     <div class="main-container">
       <sidebar class="sidebar-container"></sidebar>
@@ -12,7 +14,7 @@
 <script>
 import { HeaderBar, Sidebar, AppMain } from './components'
 import Breadcrumb from '@/components/Breadcrumb'
-import bowser from 'bowser'
+import ResizeMixin from './mixin/ResizeHandler'
 
 export default {
   name: 'layout',
@@ -22,38 +24,43 @@ export default {
     Sidebar,
     AppMain
   },
-  mounted() {
-    if (bowser.mobile) {
-      this.hiddenSidebar()
-      window.addEventListener('resize', this.hiddenSidebar)
-    }
-  },
+  mixins: [ResizeMixin],
   computed: {
     sidebar() {
       return this.$store.state.app.sidebar
+    },
+    device() {
+      return this.$store.state.app.device
+    },
+    classObj() {
+      return {
+        hideSidebar: !this.sidebar.opened,
+        withoutAnimation: this.sidebar.withoutAnimation,
+        mobile: this.device === 'mobile'
+      }
     }
   },
   methods: {
-    hiddenSidebar() {
-      this.$store.dispatch('toggleSideBar')
+    handleClickOutside() {
+      this.$store.dispatch('closeSideBar', { withoutAnimation: false })
     }
   }
 }
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-  @import "src/styles/mixin.scss";
+@import 'src/styles/mixin.scss';
 
-  .app-wrapper {
-    @include clearfix;
-    position: relative;
-    min-height: 100%;
-    width: 100%;
-  }
+.app-wrapper {
+  @include clearfix;
+  position: relative;
+  min-height: 100%;
+  width: 100%;
+}
 
-  .breadcrumb-container {
-    padding-left: 12px;
-    height: 48px;
-    line-height: 48px;
-  }
+.breadcrumb-container {
+  padding-left: 12px;
+  height: 48px;
+  line-height: 48px;
+}
 </style>

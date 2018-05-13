@@ -3,8 +3,8 @@
      <go-back></go-back>
     <el-tabs v-model="activeName">
       <el-tab-pane :label="$t('crew.title')" name="crewInfo">
-        <div class="crew-info" v-loading="crewLoading" :element-loading-text="$t('table.loadingText')">
-          <router-link class="edit-link" :to="'/crew/editCrew/' + crewId"><el-button type="success" size="small" icon="el-icon-edit" plain>编辑</el-button></router-link>
+        <div class="show-content" v-loading="pageLoading" :element-loading-text="$t('table.loadingText')">
+          <router-link class="edit-link" :to="'/crew/editCrew/' + crewId"><el-button type="success" size="small" icon="el-icon-edit" plain>{{$t('table.edit')}}</el-button></router-link>
           <dl class="dl-horizontal">
             <dt>{{$t('crew.staff')}}</dt>
             <dd>{{crewInfo.staff}}</dd>
@@ -28,17 +28,21 @@
 </template>
 
 <script>
-import { getCrewsInfo } from '@/api/crew'
-import promptConfig from '@/promptConfig'
+import { fetchInfo } from '@/api/crew'
+import errorConfig from '@/errorConfig'
 import goBack from '@/components/GoBack'
+import config from '@/config'
 
 export default {
   name: 'show',
+  components: {
+    goBack
+  },
   data() {
     return {
-      crewLoading: true,
-      crewId: null,
+      pageLoading: true,
       activeName: 'crewInfo',
+      crewId: null,
       crewInfo: {
         staff: null,
         userName: null,
@@ -56,52 +60,40 @@ export default {
       }
     }
   },
-  filters: {
-    statusFilter(status) {
-      const statusMap = {
-        0: '启用',
-        1: '禁用'
-      }
-      return statusMap[status]
-    },
-    statusFilterByTag(status) {
-      const statusMap = {
-        0: 'success',
-        1: 'danger'
-      }
-      return statusMap[status]
-    }
-  },
   created() {
-    this.getCrewId()
-    this.getCrewInfo()
+    this.getCrewInfo(this.getCrewId())
   },
   methods: {
     getCrewId() {
       this.crewId = this.$route.params.id
+      return this.crewId
     },
-    getCrewInfo() {
-      this.crewLoading = true
-      getCrewsInfo(this.crewId).then(responst => {
-        const responseData = responst.data
-        if (responseData.status === 1) {
-          this.crewInfo = responseData.data
-          console.log(this.crewInfo)
-          this.crewLoading = false
-        } else {
-          this.$message({
-            message: promptConfig.SUCCESSFUL_OPERATION,
-            type: 'success'
-          })
-        }
-      })
+    getCrewInfo(id) {
+      this.pageLoading = true
+      if (id && id !== 'null') {
+        fetchInfo(id).then(response => {
+          const responseData = response.data
+          if (responseData.status === config.STATUS_SUCCESS) {
+            this.crewInfo = responseData.data
+            this.pageLoading = false
+          } else {
+            this.$message({
+              message: errorConfig.ER_PARAMETER,
+              type: 'error'
+            })
+            this.$router.push({ path: '/crew' })
+          }
+        })
+      } else {
+        this.$message({
+          message: errorConfig.ER_PARAMETER,
+          type: 'error'
+        })
+        this.$router.push({ path: '/crew' })
+      }
     }
-  },
-  components: {
-    goBack
   }
 }
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped></style>
-

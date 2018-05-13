@@ -101,11 +101,43 @@
     color: #fff;
   }
 
+  .el-pagination.is-background .el-pager li:not(.disabled).active {
+    background: rgba(6, 202, 158, 0.6);
+    border-color: rgba(6, 202, 158, 0.6);
+    color: #fff;
+  }
+
+  .el-pagination.is-background .btn-next.disabled,
+  .el-pagination.is-background .btn-prev.disabled,
+  .el-pagination.is-background .el-pager li.disabled {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .el-select .el-input.is-focus .el-input__inner {
+    border-color: $theme-jack-base;
+  }
+
+  .el-select .el-input__inner:focus {
+    border-color: $theme-jack-base;
+  }
+
+  .el-pagination__sizes .el-input .el-input__inner:hover {
+    border-color: $theme-jack-base;
+  }
+
   .el-pagination__jump {
     color: $white;
   }
 
   .el-input__inner {
+    color: $white;
+  }
+
+  .el-textarea__inner {
+    color: $white;
+  }
+
+  .el-pagination__total {
     color: $white;
   }
 
@@ -309,7 +341,7 @@
     }
   }
   .signIn-container {
-    background-image: url('../assets/img/signin_bg_jack.jpg');
+    // background-image: url('../assets/img/signin_bg_jack.jpg');
 
     &::before {
       content: '';
@@ -468,7 +500,10 @@
 
   .dl-horizontal {
     dt {
-      color: rgba(255, 255, 255, 0.8);
+      color: rgba(255, 255, 255, 0.6);
+    }
+    dd {
+      color: rgba(255, 255, 255, 1);
     }
   }
 
@@ -493,13 +528,13 @@
     background: rgba(18, 54, 70, 0.95);
   }
   .el-dialog__header {
-    border-bottom-color: rgba(255,255,255,.2);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
   }
   .el-dialog__title {
     color: $white;
   }
   .el-dialog__footer {
-    border-top-color: rgba(255,255,255,.2);
+    border-top-color: rgba(255, 255, 255, 0.1);
   }
 }
 
@@ -559,7 +594,7 @@
   .el-message-box__content {
     color: $white;
   }
-  
+
   .el-button.is-plain {
     background: rgba(255, 255, 255, 0.2);
     border-color: rgba(255, 255, 255, 0.6);
@@ -585,4 +620,24 @@
     border-color: rgba(6, 202, 158, 0.6);
     color: #fff;
   }
+}
+
+.jack ~ .el-message--success {
+  background-color: rgba(103, 194, 58, 0.2);
+  border-color: rgba(103, 194, 58, 0.6);
+}
+
+.jack ~ .el-message--warning {
+  background-color: rgba(230, 162, 60, 0.2);
+  border-color: rgba(230, 162, 60, 0.6);
+}
+
+.jack ~ .el-message--info {
+  background-color: rgba(144, 147, 153, 0.2);
+  border-color: rgba(144, 147, 153, 0.6);
+}
+
+.jack ~ .el-message--error {
+  background-color: rgba(245, 108, 108, 0.2);
+  border-color: rgba(245, 108, 108, 0.6);
 }

@@ -3,16 +3,19 @@ export default {
     dashboard: '首页',
     user: '用户',
     member: '注册用户',
-    personal: '认证农户',
-    company: '认证企业',
+    approve: '认证用户',
     administrator: '管理员',
     crew: '人员管理',
     showCrew: '查看人员信息',
     editCrew: '编辑人员',
-    bankInstitutions: '银行管理',
-    bank: '银行机构',
+    bank: '银行管理',
+    editBank: '编辑银行',
+    showBank: '银行信息',
     uCenter: '个人中心',
     bankInfo: '银行信息',
+    branches: '分支机构',
+    editBranches: '查看分支机构',
+    showBranches: '查看分支机构',
     baseInfo: '个人信息',
     products: '产品',
     companyProduct: '银企对接产品',
@@ -47,8 +50,8 @@ export default {
   signIn: {
     title: '宜昌市中小微企业和农村信用信息共享服务平台',
     logIn: '登录',
-    cellphonePlaceholder: '请输入手机号码',
-    passwordPlaceholder: '请输入密码',
+    cellphone: '手机号',
+    password: '密码',
     loginIndex: '登录宜昌市中小微企业和农村信用信息共享服务平台官网',
     description: '“宜昌市中小微企业和农村信用信息共享服务平台”网站具有为政府公共管理信息归集、交换、公示及金融产品展示等各类网上服务功能；建立信息采集、信用评价、信用服务、异议处理等功能的信用信息共享服务平台；为建成全面的农村信用主体数据库，围绕信用信息金融应用提供“一站式”服务。'
   },
@@ -69,7 +72,7 @@ export default {
     rePassword: '确认密码',
     submit: '提交',
     cellphone: '手机号码',
-    smscellphone: '手机号码',
+    smsCellphone: '手机号码',
     verifcationCode: '短信验证码',
     sendMessages: '发送短信',
     authentication: '身份验证'
@@ -93,6 +96,34 @@ export default {
     showTitle: '查看员工信息',
     editCrew: '编辑/新增信息',
     submit: '提交'
+  },
+  bank: {
+    title: '银行信息',
+    name: '银行名称',
+    contactPhone: '银行电话',
+    logo: 'LOGO',
+    status: '状态',
+    updateTime: '更新时间',
+    editBank: '编辑/新增银行',
+    briefIntroduction: '银行简介'
+  },
+  member: {
+    searchValue: '姓名、手机号',
+    number: '编号',
+    cellphone: '手机号码',
+    createTime: '注册时间',
+    status: '状态'
+  },
+  branches: {
+    title: '分支机构信息',
+    baseInfo: '基本信息',
+    branches: '分支机构',
+    name: '机构名称',
+    contactAddress: '地址',
+    contactPhone: '电话',
+    contactName: '联系人',
+    status: '状态',
+    updateTime: '更新时间'
   },
   products: {
     loanAmount: '贷款额度',
@@ -140,7 +171,9 @@ export default {
     updateTime: '更新时间',
     loanAmountMin: '贷款最低额度',
     loanAmountMax: '贷款最高额度',
-    role: '角色'
+    role: '角色',
+    submit: '确认',
+    reset: '取消'
   },
   components: {
     documentation: '文档',

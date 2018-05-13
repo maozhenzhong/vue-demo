@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { getCrewsInfo } from '@/api/crew'
+import { fetchInfo } from '@/api/crew'
 import goBack from '@/components/GoBack'
 import errorConfig from '@/errorConfig'
 import {
@@ -160,13 +160,11 @@ export default {
   },
   methods: {
     getCrewId() {
-      // this.crewId = this.$route.params.id
-      // console.log(this.crewId)
       return this.$route.params.id
     },
     getCrewInfo(crewId) {
       if (crewId && crewId !== '-1') {
-        getCrewsInfo(crewId).then(response => {
+        fetchInfo(crewId).then(response => {
           this.crewInfoForm = response.data.data
           console.log(this.crewInfoForm)
           console.log('update')

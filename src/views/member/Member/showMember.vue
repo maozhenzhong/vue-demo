@@ -1,11 +1,11 @@
 <template>
   <div class="container-fluid">
-    我是企业
+    查看
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Company'
+  name: 'Farmer'
 }
 </script>

@@ -2,14 +2,14 @@ import request from '@/utils/request'
 
 export function getUserInfo() {
   return request({
-    url: '/baseInfo/getUserInfo',
+    url: '/personalCenter',
     method: 'GET'
   })
 }
 
-export function updateUserInfo(data) {
+export function updateUserInfo(data, id) {
   return request({
-    url: '/baseInfo/update',
+    url: '/crews/' + id + '/edit',
     method: 'POST',
     data
   })
@@ -29,9 +29,11 @@ export function sendSmsVerifcationCode(data) {
   })
 }
 
-export function changePassword(data) {
+export function updatePassword(data, id) {
+  console.log(data, id)
   return request({
-    url: '/baseInfo/changePwd',
-    method: 'POST'
+    url: '/crews/' + id + '/updatePassword',
+    method: 'POST',
+    data
   })
 }

@@ -102,3 +102,19 @@ export function html2Text(val) {
 export function toThousandslsFilter(num) {
   return (+num || 0).toString().replace(/^-?\d+/g, m => m.replace(/(?=(?!\b)(\d{3})+$)/g, ','))
 }
+
+export function statusFilter(status) {
+  const statusMap = {
+    '0': '启用',
+    '-2': '禁用'
+  }
+  return statusMap[status]
+}
+
+export function statusFilterByTag(status) {
+  const statusMap = {
+    '0': 'success',
+    '-2': 'danger'
+  }
+  return statusMap[status]
+}

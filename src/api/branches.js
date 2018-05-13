@@ -2,15 +2,15 @@ import request from '@/utils/request'
 
 export function fetchList(query) {
   return request({
-    url: '/crews',
-    method: 'GET',
+    url: '/branches',
+    methods: 'POST',
     params: query
   })
 }
 
 export function fetchInfo(id) {
   return request({
-    url: '/crews/' + id,
+    url: '/branches/' + id,
     method: 'GET'
   })
 }

@@ -331,7 +331,7 @@
 		+ 编号
 		+ 企业名称
 		+ 手机号码
-		+ 社会统一信用代码 organizationCode
+		+ 社会统一信用代码 unifiedSocialCreditCode
 		+ 注册时间
 		+ 状态
 		+ 操作

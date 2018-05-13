@@ -31,15 +31,15 @@
 
 ### vue方法命名
 
-1. components
-2. props
-3. data
-4. created
-5. mounted
-6. activited
-7. update
-8. beforeRouteUpdate
-9. methods
+01. components
+02. props
+03. data
+04. created
+05. mounted
+06. activited
+07. update
+08. beforeRouteUpdate
+09. methods
 10. filter
 11. computed
 12. watch

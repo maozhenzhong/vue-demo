@@ -1,11 +1,11 @@
 <template>
   <div class="container-fluid">
-    我是农户
+    分支机构
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Personal'
+  name: 'editBranches'
 }
 </script>

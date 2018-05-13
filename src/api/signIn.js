@@ -30,11 +30,10 @@ export function getSignInHash() {
   })
 }
 
-export function getUserInfo(token) {
+export function getUserInfo() {
   return request({
     url: '/personalCenter',
-    method: 'GET',
-    params: { token }
+    method: 'GET'
   })
 }
 

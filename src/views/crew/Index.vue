@@ -4,9 +4,9 @@
     <div class="filter-bar">
       <div class="left">
         <div class="search-component filter-item">
-          <el-input placeholder="请输入内容" class="input-with-select">
-            <el-select v-model="listQuery.bank" slot="prepend" placeholder="请选择">
-              <el-option v-for="item in bankOptions" :key="item.key" :label="item.bank" :value="item.key"></el-option>
+          <el-input :placeholder="$t('crew.cellphone')" class="input-with-select">
+            <el-select v-model="listQuery.bank" slot="prepend" :placeholder="$t('crew.bank')">
+              <el-option v-for="item in bankOptions" :key="item.id" :label="item.name" :value="item.id"></el-option>
             </el-select>
             <el-button slot="append" icon="el-icon-search"></el-button>
           </el-input>
@@ -15,7 +15,7 @@
       <div class="right">
         <el-row :gutter="10">
           <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
-            <router-link to="/crew/editCrew/-1">
+            <router-link to="/crew/editCrew/null">
               <el-button class="btn-add" type="success" icon="el-icon-edit" plain>{{$t('filter.add')}}</el-button>
             </router-link>
           </el-col>
@@ -26,10 +26,9 @@
       </div>
     </div>
     <!-- 列表 -->
-    <el-table :data="crewList" v-loading="crewLoading" :element-loading-text="$t('table.loadingText')" border :default-sort="{prop: 'status', order: 'descending'}">
-      <el-table-column :label="$t('crew.name')" prop="name" sortable align="center" min-width="150">
+    <el-table :data="crewList" v-loading="listLoading" :element-loading-text="$t('table.loadingText')" border :default-sort="{prop: 'status', order: 'descending'}">
+      <el-table-column :label="$t('crew.name')" prop="name" sortable align="center" min-width="160">
         <template slot-scope="scope">
-          <!-- <router-link class="edit-link" :to="'/crew/showCrew/' + scope.row.id">{{ scope.row.name }}</router-link> -->
           <a class="link-type" @click="handleView(scope.row)">{{ scope.row.name }}</a>
         </template>
       </el-table-column>
@@ -53,7 +52,7 @@
           <el-tag :type="scope.row.status | statusFilterByTag">{{scope.row.status | statusFilter}}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column align="center" :label="$t('table.actions')" min-width="120">
+      <el-table-column align="center" :label="$t('table.actions')" width="120">
         <template slot-scope="scope">
           <el-dropdown>
             <span class="el-dropdown-link">
@@ -62,16 +61,16 @@
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>
-                <router-link :to="'/crew/editCrew/' + scope.row.id"> {{$t('table.edit')}}</router-link>
-              </el-dropdown-item>
-              <el-dropdown-item>
                 <router-link :to="'/crew/showCrew/' + scope.row.id">{{$t('table.show')}}</router-link>
               </el-dropdown-item>
-              <el-dropdown-item v-if="scope.row.status!==0">
+              <el-dropdown-item>
+                <router-link :to="'/crew/editCrew/' + scope.row.id"> {{$t('table.edit')}}</router-link>
+              </el-dropdown-item>
+              <el-dropdown-item v-if="scope.row.status !== 0">
                 <a @click="handleEditStatus(scope.row, 0)">{{$t('table.enable')}}</a>
               </el-dropdown-item>
-              <el-dropdown-item v-if="scope.row.status!==1">
-                <a @click="handleEditStatus(scope.row, 1)">{{$t('table.disabled')}}</a>
+              <el-dropdown-item v-if="scope.row.status !== -2">
+                <a @click="handleEditStatus(scope.row, -2)">{{$t('table.disabled')}}</a>
               </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
@@ -84,29 +83,22 @@
       </el-pagination>
     </div>
 
-    <!-- 弹出显示 -->
+    <!-- 弹出显示人员信息 -->
     <el-dialog :title="$t('crew.title')" :visible.sync="crewDialogVisible" width="390px">
-      <div class="crew-info-container">
-        <div class="crew-info-avatar">
-          <figure class="avatar">
-            <!-- <img :src="crewInfo.avatar"> -->
-          </figure>
-        </div>
-        <div class="crew-info-content">
-          <dl class="dl-horizontal">
-            <dt>{{$t('crew.name')}}</dt>
-            <dd>{{crewInfo.name}}</dd>
-            <dt>{{$t('crew.cellphone')}}</dt>
-            <dd>{{crewInfo.cellphone}}</dd>
-            <dt>{{$t('crew.bank')}}</dt>
-            <dd>{{crewInfo.bank.name}}</dd>
-            <dt>{{$t('crew.role')}}</dt>
-            <dd>{{crewInfo.role.name}}</dd>
-          </dl>
-        </div>
+      <div class="info-content">
+        <dl class="dl-horizontal">
+          <dt>{{$t('crew.name')}}</dt>
+          <dd>{{crewInfo.name}}</dd>
+          <dt>{{$t('crew.cellphone')}}</dt>
+          <dd>{{crewInfo.cellphone}}</dd>
+          <dt>{{$t('crew.bank')}}</dt>
+          <dd>{{crewInfo.bank.name}}</dd>
+          <dt>{{$t('crew.role')}}</dt>
+          <dd>{{crewInfo.role.name}}</dd>
+        </dl>
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="crewDialogVisible=false" size="small">确 定</el-button>
+        <el-button type="success" @click="crewDialogVisible=false" size="small" plain>确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -114,17 +106,18 @@
 
 <script>
 import { fetchList } from '@/api/crew'
-import promptConfig from '@/promptConfig'
 import { parseTime } from '@/utils'
+import promptConfig from '@/promptConfig'
+import config from '@/config'
 
 const bankOptions = [
-  { key: 'BOC', bank: '中国银行' },
-  { key: 'CMB', bank: '招商银行' },
-  { key: 'CCB', bank: '中国建设银行' },
-  { key: 'CEB', bank: '中国光大银行' },
-  { key: 'ABC', bank: '中国农业银行' },
-  { key: 'CMBC', bank: '中国民生银行' },
-  { key: 'CIB', bank: '兴业银行' }
+  { id: '1', name: '中国银行' },
+  { id: '2', name: '招商银行' },
+  { id: '3', name: '中国建设银行' },
+  { id: '4', name: '中国光大银行' },
+  { id: '5', name: '中国农业银行' },
+  { id: '6', name: '中国民生银行' },
+  { id: '7', name: '兴业银行' }
 ]
 
 export default {
@@ -147,36 +140,20 @@ export default {
         }
       },
       total: 0,
-      crewLoading: true,
+      listLoading: true,
       downloadLoading: false,
       listQuery: {
         page: 1,
-        limit: 10,
-        importance: undefined,
-        title: undefined,
-        bank: {
-          id: null,
-          name: null
-        },
-        sort: '+id'
+        limit: 10
+        // importance: undefined,
+        // title: undefined,
+        // bank: {
+        //   id: null,
+        //   name: null
+        // },
+        // sort: '+id'
       },
       crewDialogVisible: false
-    }
-  },
-  filters: {
-    statusFilter(status) {
-      const statusMap = {
-        0: '启用',
-        1: '禁用'
-      }
-      return statusMap[status]
-    },
-    statusFilterByTag(status) {
-      const statusMap = {
-        0: 'success',
-        1: 'danger'
-      }
-      return statusMap[status]
     }
   },
   created() {
@@ -184,33 +161,43 @@ export default {
   },
   methods: {
     getList() {
-      this.crewLoading = true
+      this.listLoading = true
       fetchList(this.listQuery).then(response => {
-        console.log(response)
-        this.crewList = response.data.data
-        this.total = response.data.total
-        this.crewLoading = false
+        const responseStatus = response.data.status
+        const responseData = response.data.data
+        if (responseStatus === config.STATUS_SUCCESS) {
+          this.crewList = responseData.list
+          this.total = responseData.count
+        } else {
+          this.$message({
+            message: responseData.detail,
+            type: 'error'
+          })
+        }
+        this.listLoading = false
       })
     },
     handleEditStatus(row, status) {
-      this.$confirm('确认审核该人员？', '人员审核', {
+      this.$confirm('确认执行该操作吗？', '启用', {
         confirmButtonText: '确定',
         confirmButtonClass: 'is-plain el-button--success el-button--medium',
         cancelButtonText: '取消',
         cancelButtonClass: 'is-plain el-button--medium',
         type: 'warning'
-      }).then(() => {
-        this.$message({
-          message: promptConfig.SUCCESSFUL_OPERATION,
-          type: 'success'
-        })
-        row.status = status
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消审核'
-        })
       })
+        .then(() => {
+          this.$message({
+            message: promptConfig.SUCCESSFUL_OPERATION,
+            type: 'success'
+          })
+          row.status = status
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消审核'
+          })
+        })
     },
     handleSizeChange(val) {
       this.listQuery.limit = val
@@ -235,18 +222,19 @@ export default {
       })
     },
     formatJson(filterVal, jsonData) {
-      return jsonData.map(v => filterVal.map(j => {
-        if (j === 'timestamp') {
-          return parseTime(v[j])
-        } else {
-          return v[j]
-        }
-      }))
+      return jsonData.map(v =>
+        filterVal.map(j => {
+          if (j === 'timestamp') {
+            return parseTime(v[j])
+          } else {
+            return v[j]
+          }
+        })
+      )
     },
     handleView(row) {
       this.crewInfo = row
       this.crewDialogVisible = true
-      console.log(this.crewInfo)
     }
   }
 }
